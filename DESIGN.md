@@ -27,6 +27,7 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 - UI and navigation: `Instrument Sans`, with system CJK fallbacks.
 - Chinese copy follows the spacing and punctuation conventions from [少数派写作排版指南](https://sspai.com/post/37815): Chinese and Latin/数字之间留半角空格，不用段首空格，使用「」与……，长文不依赖粗体和彩色标记制造层级。
 - Reading paragraphs are left-aligned, without first-line indentation, and separated by a consistent paragraph rhythm. Metadata is small and tracked, but never competes with the body copy.
+- Narrative voice follows the original conversation: begin with a concrete scene or action, let the reader discover the motive and consequence in sequence, then pause for the ethical question. Avoid repeating “表面上 / 真正的问题是 / 这一章真正讨论的是” as a chapter template; interpretation should arrive after the story has earned it.
 - Chapter titles are allowed to be large and editorial; labels stay compact so the page still reads like a book.
 
 ## Layout
