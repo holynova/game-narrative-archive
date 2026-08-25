@@ -103,7 +103,15 @@ function ReadingView({ onAppendix }: { onAppendix: (tab?: AppendixTab) => void }
 }
 
 function ChapterBlock({ chapter, number }: { chapter: (typeof chapters)[number]; number: number }) {
-  return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{chapter.region}</span><h2>{chapter.title}</h2><p>{chapter.subtitle}</p></div></header><p className="chapter-body">{chapter.summary}</p><div className="reading-notes"><blockquote className="fact-note"><span>确定事实</span><p>{chapter.fact}</p></blockquote><blockquote className="reading-note"><span>读法</span><p>{chapter.reading}</p></blockquote></div><aside className="hard-question"><span>这一章留下的问题</span><strong>{chapter.question}</strong></aside><div className="chapter-tail"><span>{chapter.tags.join('  ·  ')}</span><span>{String(number).padStart(2, '0')} / 11</span></div></section>
+  return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{chapter.region}</span><h2>{chapter.title}</h2><p>{chapter.subtitle}</p></div></header><div className="story-prose">{chapter.body.map((paragraph, index) => <p className={storyParagraphClass(paragraph)} key={`${chapter.id}-${index}`}>{paragraph}</p>)}</div><aside className="hard-question"><span>这一章留下的问题</span><strong>{chapter.question}</strong></aside><div className="chapter-tail"><span>{chapter.tags.join('  ·  ')}</span><span>{String(number).padStart(2, '0')} / 11</span></div></section>
+}
+
+function storyParagraphClass(paragraph: string) {
+  if (paragraph.startsWith('>')) return 'story-quote'
+  if (paragraph.startsWith('【确定】')) return 'story-fact'
+  if (paragraph.startsWith('【很可能】')) return 'story-reading'
+  if (/^(选择|如果|与此同时|最终|现在再看|结局|路线|所以我的判断|这就是|真正的)/.test(paragraph)) return 'story-turn'
+  return ''
 }
 
 function ContentsView({ onRead }: { onRead: (chapterId?: string) => void }) {
