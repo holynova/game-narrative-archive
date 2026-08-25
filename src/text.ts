@@ -1,6 +1,7 @@
 type CharacterNameRule = {
   canonical: string
   english: string
+  short?: string
   aliases: string[]
 }
 
@@ -8,25 +9,25 @@ const characterNameRules: CharacterNameRule[] = [
   { canonical: '杰洛特', english: 'Geralt', aliases: ['Geralt'] },
   { canonical: '希里', english: 'Ciri', aliases: ['Ciri', 'Cirilla'] },
   { canonical: '叶奈法', english: 'Yennefer', aliases: ['Yennefer'] },
-  { canonical: '特莉丝·梅莉葛德', english: 'Triss Merigold', aliases: ['特莉丝', 'Triss'] },
+  { canonical: '特莉丝·梅莉葛德', english: 'Triss Merigold', short: '特莉丝', aliases: ['特莉丝', 'Triss'] },
   { canonical: '维瑟米尔', english: 'Vesemir', aliases: ['Vesemir'] },
   { canonical: '丹德里恩', english: 'Dandelion', aliases: ['Dandelion'] },
   { canonical: '血腥男爵', english: 'The Bloody Baron', aliases: ['Bloody Baron', 'The Bloody Baron'] },
   { canonical: '菲利普·斯特伦格', english: 'Philip Strenger', aliases: ['Philip Strenger'] },
-  { canonical: '刚特·欧迪姆', english: "Gaunter O'Dimm", aliases: ['冈特·欧迪姆', '欧迪姆', 'Gaunter O’Dimm', "Gaunter O'Dimm", 'O’Dimm', "O'Dimm"] },
-  { canonical: '凯拉·梅兹', english: 'Keira Metz', aliases: ['凯拉', 'Keira Metz', 'Keira'] },
+  { canonical: '刚特·欧迪姆', english: "Gaunter O'Dimm", short: '欧迪姆', aliases: ['冈特·欧迪姆', '欧迪姆', 'Gaunter O’Dimm', "Gaunter O'Dimm", 'O’Dimm', "O'Dimm"] },
+  { canonical: '凯拉·梅兹', english: 'Keira Metz', short: '凯拉', aliases: ['凯拉', 'Keira Metz', 'Keira'] },
   { canonical: '阿瓦拉克', english: "Avallac'h", aliases: ['Avallac’h', "Avallac'h", 'Avallac', 'Avallac\'h'] },
   { canonical: '罗契', english: 'Vernon Roche', aliases: ['Roche'] },
   { canonical: '迪科斯彻', english: 'Sigismund Dijkstra', aliases: ['Dijkstra'] },
-  { canonical: '欧吉尔德·冯·埃弗雷克', english: 'Olgierd von Everec', aliases: ['欧吉尔德', '欧吉尔德·冯·爱维瑞克', 'Olgierd von Everec', 'Olgierd'] },
-  { canonical: '爱丽丝·冯·埃弗雷克', english: 'Iris von Everec', aliases: ['Iris von Everec'] },
+  { canonical: '欧吉尔德·冯·埃弗雷克', english: 'Olgierd von Everec', short: '欧吉尔德', aliases: ['欧吉尔德', '欧吉尔德·冯·爱维瑞克', 'Olgierd von Everec', 'Olgierd'] },
+  { canonical: '爱丽丝·冯·埃弗雷克', english: 'Iris von Everec', short: '爱丽丝', aliases: ['爱丽丝', 'Iris von Everec'] },
   { canonical: '弗洛迪米尔', english: 'Vlodimir von Everec', aliases: ['Vlodimir'] },
   { canonical: '欧立安娜', english: 'Orianna', aliases: ['Orianna'] },
   { canonical: '席安娜', english: 'Syanna', aliases: ['Syanna'] },
   { canonical: '狄拉夫', english: 'Dettlaff', aliases: ['Dettlaff'] },
   { canonical: '雷吉斯', english: 'Regis', aliases: ['Regis'] },
-  { canonical: '安娜·亨利叶塔', english: 'Anna Henrietta', aliases: ['Anna Henrietta'] },
-  { canonical: '克拉奇·安·克莱特', english: 'Crach an Craite', aliases: ['Crach an Craite'] },
+  { canonical: '安娜·亨利叶塔', english: 'Anna Henrietta', short: '安娜', aliases: ['安娜·亨利叶塔', 'Anna Henrietta'] },
+  { canonical: '克拉奇·安·克莱特', english: 'Crach an Craite', short: '克拉奇', aliases: ['克拉奇', 'Crach an Craite'] },
   { canonical: '凯瑞丝', english: 'Cerys an Craite', aliases: ['Cerys'] },
   { canonical: '哈尔玛', english: 'Hjalmar an Craite', aliases: ['Hjalmar'] },
   { canonical: '斯凡里吉', english: 'Svanrige an Tuirseach', aliases: ['Svanrige'] },
@@ -50,33 +51,33 @@ const characterNameRules: CharacterNameRule[] = [
   { canonical: '杰克·威尔斯', english: 'Jackie Welles', aliases: ['杰克', 'Jackie Welles'] },
   { canonical: '德克斯特·德肖恩', english: 'Dexter DeShawn', aliases: ['德克斯特', 'Dexter DeShawn'] },
   { canonical: '伊芙琳·帕克', english: 'Evelyn Parker', aliases: ['伊芙琳', 'Evelyn Parker'] },
-  { canonical: '赖宣·荒坂', english: 'Yorinobu Arasaka', aliases: ['赖宣', 'Yorinobu Arasaka'] },
-  { canonical: '荒坂三郎', english: 'Saburo Arasaka', aliases: ['Saburo Arasaka'] },
-  { canonical: '维克多·维克托', english: 'Viktor Vektor', aliases: ['维克多', 'Viktor Vektor'] },
-  { canonical: '奥特·坎宁安', english: 'Alt Cunningham', aliases: ['奥特', 'Alt Cunningham'] },
-  { canonical: '竹村五郎', english: 'Goro Takemura', aliases: ['竹村', 'Goro Takemura'] },
-  { canonical: '朱迪·阿尔瓦雷兹', english: 'Judy Alvarez', aliases: ['朱迪', 'Judy Alvarez'] },
-  { canonical: '帕南·帕尔默', english: 'Panam Palmer', aliases: ['帕南', 'Panam Palmer'] },
-  { canonical: '罗格·阿曼迪亚斯', english: 'Rogue Amendiares', aliases: ['罗格', 'Rogue Amendiares'] },
+  { canonical: '赖宣·荒坂', english: 'Yorinobu Arasaka', short: '赖宣', aliases: ['赖宣', 'Yorinobu Arasaka'] },
+  { canonical: '荒坂三郎', english: 'Saburo Arasaka', short: '三郎', aliases: ['三郎', 'Saburo Arasaka'] },
+  { canonical: '维克多·维克托', english: 'Viktor Vektor', short: '维克多', aliases: ['维克多', 'Viktor Vektor'] },
+  { canonical: '奥特·坎宁安', english: 'Alt Cunningham', short: '奥特', aliases: ['奥特', 'Alt Cunningham'] },
+  { canonical: '竹村五郎', english: 'Goro Takemura', short: '竹村', aliases: ['竹村', 'Goro Takemura'] },
+  { canonical: '朱迪·阿尔瓦雷兹', english: 'Judy Alvarez', short: '朱迪', aliases: ['朱迪', 'Judy Alvarez'] },
+  { canonical: '帕南·帕尔默', english: 'Panam Palmer', short: '帕南', aliases: ['帕南', 'Panam Palmer'] },
+  { canonical: '罗格·阿曼迪亚斯', english: 'Rogue Amendiares', short: '罗格', aliases: ['罗格', 'Rogue Amendiares'] },
   { canonical: '百灵鸟', english: 'Songbird', aliases: ['Songbird', 'Song So Mi'] },
-  { canonical: '所罗门·李德', english: 'Solomon Reed', aliases: ['李德', 'Solomon Reed'] },
-  { canonical: '罗莎琳德·迈尔斯', english: 'Rosalind Myers', aliases: ['罗莎琳德', 'Rosalind Myers'] },
-  { canonical: '库尔特·汉森', english: 'Kurt Hansen', aliases: ['库尔特', 'Kurt Hansen'] },
-  { canonical: '索尔·布莱特', english: 'Saul Bright', aliases: ['索尔', 'Saul Bright'] },
-  { canonical: '麦可·德圣塔', english: 'Michael De Santa', aliases: ['麦可', 'Michael De Santa', 'Michael Townley'] },
-  { canonical: '富兰克林·克林顿', english: 'Franklin Clinton', aliases: ['富兰克林', 'Franklin Clinton'] },
-  { canonical: '崔佛·菲利普', english: 'Trevor Philips', aliases: ['崔佛', 'Trevor Philips'] },
-  { canonical: '莱斯特·克瑞斯特', english: 'Lester Crest', aliases: ['莱斯特', 'Lester Crest'] },
-  { canonical: '拉玛·戴维斯', english: 'Lamar Davis', aliases: ['拉玛', 'Lamar Davis'] },
-  { canonical: '阿曼达·德圣塔', english: 'Amanda De Santa', aliases: ['阿曼达', 'Amanda De Santa'] },
-  { canonical: '吉米·德圣塔', english: 'Jimmy De Santa', aliases: ['吉米', 'Jimmy De Santa'] },
-  { canonical: '崔西·德圣塔', english: 'Tracey De Santa', aliases: ['崔西', 'Tracey De Santa'] },
-  { canonical: '戴夫·诺顿', english: 'Dave Norton', aliases: ['戴夫', 'Dave Norton'] },
-  { canonical: '史蒂夫·海因斯', english: 'Steve Haines', aliases: ['史蒂夫', 'Steve Haines'] },
-  { canonical: '德凡·韦斯顿', english: 'Devin Weston', aliases: ['德凡', 'Devin Weston'] },
-  { canonical: '马丁·马德拉索', english: 'Martin Madrazo', aliases: ['马丁', 'Martin Madrazo'] },
-  { canonical: '帕特里夏·马德拉索', english: 'Patricia Madrazo', aliases: ['帕特里夏', 'Patricia Madrazo'] },
-  { canonical: '罗恩·杰科夫斯基', english: 'Ron Jakowski', aliases: ['罗恩', 'Ron Jakowski'] },
+  { canonical: '所罗门·李德', english: 'Solomon Reed', short: '李德', aliases: ['李德', 'Solomon Reed'] },
+  { canonical: '罗莎琳德·迈尔斯', english: 'Rosalind Myers', short: '迈尔斯', aliases: ['罗莎琳德', '迈尔斯', 'Rosalind Myers'] },
+  { canonical: '库尔特·汉森', english: 'Kurt Hansen', short: '库尔特', aliases: ['库尔特', 'Kurt Hansen'] },
+  { canonical: '索尔·布莱特', english: 'Saul Bright', short: '索尔', aliases: ['索尔', 'Saul Bright'] },
+  { canonical: '麦可·德圣塔', english: 'Michael De Santa', short: '麦可', aliases: ['麦可', 'Michael De Santa', 'Michael Townley'] },
+  { canonical: '富兰克林·克林顿', english: 'Franklin Clinton', short: '富兰克林', aliases: ['富兰克林', 'Franklin Clinton'] },
+  { canonical: '崔佛·菲利普', english: 'Trevor Philips', short: '崔佛', aliases: ['崔佛', 'Trevor Philips'] },
+  { canonical: '莱斯特·克瑞斯特', english: 'Lester Crest', short: '莱斯特', aliases: ['莱斯特', 'Lester Crest'] },
+  { canonical: '拉玛·戴维斯', english: 'Lamar Davis', short: '拉玛', aliases: ['拉玛', 'Lamar Davis'] },
+  { canonical: '阿曼达·德圣塔', english: 'Amanda De Santa', short: '阿曼达', aliases: ['阿曼达', 'Amanda De Santa'] },
+  { canonical: '吉米·德圣塔', english: 'Jimmy De Santa', short: '吉米', aliases: ['吉米', 'Jimmy De Santa'] },
+  { canonical: '崔西·德圣塔', english: 'Tracey De Santa', short: '崔西', aliases: ['崔西', 'Tracey De Santa'] },
+  { canonical: '戴夫·诺顿', english: 'Dave Norton', short: '戴夫', aliases: ['戴夫', 'Dave Norton'] },
+  { canonical: '史蒂夫·海因斯', english: 'Steve Haines', short: '史蒂夫', aliases: ['史蒂夫', 'Steve Haines'] },
+  { canonical: '德凡·韦斯顿', english: 'Devin Weston', short: '德凡', aliases: ['德凡', 'Devin Weston'] },
+  { canonical: '马丁·马德拉索', english: 'Martin Madrazo', short: '马丁', aliases: ['马丁', 'Martin Madrazo'] },
+  { canonical: '帕特里夏·马德拉索', english: 'Patricia Madrazo', short: '帕特里夏', aliases: ['帕特里夏', 'Patricia Madrazo'] },
+  { canonical: '罗恩·杰科夫斯基', english: 'Ron Jakowski', short: '罗恩', aliases: ['罗恩', 'Ron Jakowski'] },
 ]
 
 const officialTranslations: [string, string][] = [
@@ -95,18 +96,22 @@ const translationPattern = new RegExp(translationEntries.map(([source]) => escap
 const rulesByCanonical = new Map(characterNameRules.map((rule) => [rule.canonical, rule]))
 const annotationPattern = new RegExp(characterNameRules.map((rule) => escapeRegex(rule.canonical)).sort((a, b) => b.length - a.length).join('|'), 'g')
 
-export function formatChineseText(value: string) {
+function normalizeChineseText(value: string) {
   const text = value.replace(translationPattern, (match) => translationMap.get(match) ?? match)
   return text.replace(/“([^”]+)”/g, '「$1」').replace(/"([^"]+)"/g, '「$1」').replace(/\.{3}/g, '……').replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, '$1 $2').replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, '$1 $2').replace(/ {2,}/g, ' ')
 }
 
+export function formatChineseText(value: string) {
+  return normalizeChineseText(value).replace(annotationPattern, (match) => rulesByCanonical.get(match)?.short ?? match)
+}
+
 export function createNarrativeFormatter() {
   const seen = new Set<string>()
-  return (value: string) => formatChineseText(value).replace(annotationPattern, (match, offset: number, source: string) => {
+  return (value: string) => normalizeChineseText(value).replace(annotationPattern, (match, offset: number, source: string) => {
     const rule = rulesByCanonical.get(match)
     if (!rule) return match
     const suffix = source.slice(offset + match.length)
-    if (seen.has(rule.canonical) || /^\s*[（(][^）)]*[）)]/.test(suffix)) return rule.canonical
+    if (seen.has(rule.canonical) || /^\s*[（(][^）)]*[）)]/.test(suffix)) return rule.short ?? rule.canonical
     seen.add(rule.canonical)
     return `${rule.canonical}（${rule.english}）`
   })
