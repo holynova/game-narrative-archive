@@ -1,4 +1,5 @@
 import { analysisSteps, methodQuestions } from './data'
+import { createNarrativeFormatter, formatChineseText } from './text'
 import type { Chapter, Character, Relationship } from './data'
 
 type ExportDecision = { title: string; prompt: string; branches: string[]; note: string }
@@ -31,7 +32,8 @@ const plain = (value: string) => value
   .replace(/\s+/g, ' ')
   .trim()
 
-const chapterLabel = (chapter: Chapter) => `第 ${chapter.index} 章 · ${plain(chapter.title)}`
+type TextFormatter = (value: string) => string
+const chapterLabel = (chapter: Chapter, formatText: TextFormatter = formatChineseText) => `第 ${chapter.index} 章 · ${plain(formatText(chapter.title))}`
 
 export function buildTextBook(editions: ExportEdition[]) {
   const lines = [
@@ -43,42 +45,43 @@ export function buildTextBook(editions: ExportEdition[]) {
   ]
 
   for (const edition of editions) {
+    const formatText = createNarrativeFormatter()
     lines.push(`━━━━━━━━ ${edition.label} ━━━━━━━━`, '')
-    lines.push(`范围：${edition.scopeLabel}`, '', plain(edition.opening), '', '序', plain(edition.preface), '')
+    lines.push(`范围：${edition.scopeLabel}`, '', plain(formatText(edition.opening)), '', '序', plain(formatText(edition.preface)), '')
 
     lines.push('目录')
     edition.chapters.forEach((chapter) => lines.push(chapterLabel(chapter)))
     lines.push('', '正文')
 
     for (const chapter of edition.chapters) {
-      lines.push('', chapterLabel(chapter), plain(chapter.subtitle), '')
-      chapter.body.forEach((paragraph) => lines.push(plain(paragraph), ''))
-      lines.push(`这一章留下的问题：${plain(chapter.question)}`)
-      lines.push(plain(chapter.fact), plain(chapter.reading), '')
+      lines.push('', chapterLabel(chapter, formatText), plain(formatText(chapter.subtitle)), '')
+      chapter.body.forEach((paragraph) => lines.push(plain(formatText(paragraph)), ''))
+      lines.push(`这一章留下的问题：${plain(formatText(chapter.question))}`)
+      lines.push(plain(formatText(chapter.fact)), plain(formatText(chapter.reading)), '')
     }
 
     lines.push('附录 · 人物关系', '')
     edition.characters.forEach((character) => {
-      lines.push(`${plain(character.name)} · ${plain(character.role)}`, plain(character.note), '')
+      lines.push(`${plain(formatText(character.name))} · ${plain(formatText(character.role))}`, plain(formatText(character.note)), '')
     })
-    const names = new Map(edition.characters.map((character) => [character.id, plain(character.name)]))
-    edition.relationships.forEach((relationship) => lines.push(`${names.get(relationship.from) ?? relationship.from} → ${names.get(relationship.to) ?? relationship.to}：${plain(relationship.label)}`))
+    const names = new Map(edition.characters.map((character) => [character.id, plain(formatText(character.name))]))
+    edition.relationships.forEach((relationship) => lines.push(`${names.get(relationship.from) ?? relationship.from} → ${names.get(relationship.to) ?? relationship.to}：${plain(formatText(relationship.label))}`))
     lines.push('')
 
     lines.push('附录 · 选择与结局', '')
     edition.decisions.forEach((decision) => {
-      lines.push(decision.title, plain(decision.prompt), `分支：${decision.branches.map(plain).join(' / ')}`, `解读：${plain(decision.note)}`, '')
+      lines.push(plain(formatText(decision.title)), plain(formatText(decision.prompt)), `分支：${decision.branches.map((branch) => plain(formatText(branch))).join(' / ')}`, `解读：${plain(formatText(decision.note))}`, '')
     })
-    edition.endings.forEach((ending) => lines.push(ending.title, `条件：${plain(ending.condition)}`, `解读：${plain(ending.reading)}`, ''))
+    edition.endings.forEach((ending) => lines.push(plain(formatText(ending.title)), `条件：${plain(formatText(ending.condition))}`, `解读：${plain(formatText(ending.reading))}`, ''))
 
     lines.push('附录 · DLC 对照', '')
-    edition.dlcCards.forEach((card) => lines.push(`${card.label} · ${plain(card.title)}`, plain(card.body), ''))
-    edition.dlcThemes.forEach((theme) => lines.push(plain(theme.label), `本体：${plain(theme.base)}`, `DLC：${plain(theme.dlc)}`, ''))
+    edition.dlcCards.forEach((card) => lines.push(`${card.label} · ${plain(formatText(card.title))}`, plain(formatText(card.body)), ''))
+    edition.dlcThemes.forEach((theme) => lines.push(plain(formatText(theme.label)), `本体：${plain(formatText(theme.base))}`, `DLC：${plain(formatText(theme.dlc))}`, ''))
 
-    lines.push('附录 · 分析方法', plain(edition.methodIntro), '')
-    analysisSteps.forEach((step) => lines.push(`${step.number} · ${plain(step.title)}`, plain(step.body), ''))
+    lines.push('附录 · 分析方法', plain(formatText(edition.methodIntro)), '')
+    analysisSteps.forEach((step) => lines.push(`${step.number} · ${plain(formatText(step.title))}`, plain(formatText(step.body)), ''))
     lines.push('先问这六个问题')
-    methodQuestions.forEach((question, index) => lines.push(`${String(index + 1).padStart(2, '0')} · ${plain(question)}`))
+    methodQuestions.forEach((question, index) => lines.push(`${String(index + 1).padStart(2, '0')} · ${plain(formatText(question))}`))
     lines.push('')
   }
 
@@ -91,22 +94,23 @@ const escapeHtml = (value: string) => plain(value)
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;')
 
-const paragraphHtml = (value: string) => `<p>${escapeHtml(value)}</p>`
+const paragraphHtml = (value: string, formatText: TextFormatter = formatChineseText) => `<p>${escapeHtml(formatText(value))}</p>`
 
-function chapterHtml(chapter: Chapter) {
-  return `<section id="chapter-${escapeHtml(chapter.id)}"><h2>${escapeHtml(chapterLabel(chapter))}</h2><p class="subtitle">${escapeHtml(chapter.subtitle)}</p>${chapter.body.map(paragraphHtml).join('')}<aside><strong>这一章留下的问题</strong><p>${escapeHtml(chapter.question)}</p><p>${escapeHtml(chapter.fact)}</p><p>${escapeHtml(chapter.reading)}</p></aside></section>`
+function chapterHtml(chapter: Chapter, formatText: TextFormatter) {
+  return `<section id="chapter-${escapeHtml(chapter.id)}"><h2>${escapeHtml(chapterLabel(chapter, formatText))}</h2><p class="subtitle">${escapeHtml(formatText(chapter.subtitle))}</p>${chapter.body.map((paragraph) => paragraphHtml(paragraph, formatText)).join('')}<aside><strong>这一章留下的问题</strong><p>${escapeHtml(formatText(chapter.question))}</p><p>${escapeHtml(formatText(chapter.fact))}</p><p>${escapeHtml(formatText(chapter.reading))}</p></aside></section>`
 }
 
 function editionHtml(edition: ExportEdition, index: number) {
+  const formatText = createNarrativeFormatter()
   const toc = edition.chapters.map((chapter) => `<li><a href="#chapter-${escapeHtml(chapter.id)}">${escapeHtml(chapterLabel(chapter))}</a></li>`).join('')
-  const names = new Map(edition.characters.map((character) => [character.id, plain(character.name)]))
-  const people = edition.characters.map((character) => `<p><strong>${escapeHtml(character.name)}</strong> · ${escapeHtml(character.role)}<br />${escapeHtml(character.note)}</p>`).join('') + `<h3>关系</h3>${edition.relationships.map((relationship) => `<p>${escapeHtml(names.get(relationship.from) ?? relationship.from)} → ${escapeHtml(names.get(relationship.to) ?? relationship.to)}：${escapeHtml(relationship.label)}</p>`).join('')}`
-  const decisions = edition.decisions.map((decision) => `<section><h3>${escapeHtml(decision.title)}</h3>${paragraphHtml(decision.prompt)}<p>分支：${escapeHtml(decision.branches.map(plain).join(' / '))}</p><p>解读：${escapeHtml(decision.note)}</p></section>`).join('')
-  const endings = edition.endings.map((ending) => `<section><h3>${escapeHtml(ending.title)}</h3><p>条件：${escapeHtml(ending.condition)}</p><p>解读：${escapeHtml(ending.reading)}</p></section>`).join('')
-  const dlc = edition.dlcCards.map((card) => `<section><h3>${escapeHtml(card.label)} · ${escapeHtml(card.title)}</h3>${paragraphHtml(card.body)}</section>`).join('') + edition.dlcThemes.map((theme) => `<section><h3>${escapeHtml(theme.label)}</h3><p>本体：${escapeHtml(theme.base)}</p><p>DLC：${escapeHtml(theme.dlc)}</p></section>`).join('')
-  const method = analysisSteps.map((step) => `<section><h3>${escapeHtml(step.number)} · ${escapeHtml(step.title)}</h3>${paragraphHtml(step.body)}</section>`).join('') + `<h3>先问这六个问题</h3>${methodQuestions.map((question, questionIndex) => `<p>${String(questionIndex + 1).padStart(2, '0')} · ${escapeHtml(question)}</p>`).join('')}`
+  const names = new Map(edition.characters.map((character) => [character.id, plain(formatChineseText(character.name))]))
+  const people = edition.characters.map((character) => `<p><strong>${escapeHtml(formatText(character.name))}</strong> · ${escapeHtml(formatText(character.role))}<br />${escapeHtml(formatText(character.note))}</p>`).join('') + `<h3>关系</h3>${edition.relationships.map((relationship) => `<p>${escapeHtml(names.get(relationship.from) ?? relationship.from)} → ${escapeHtml(names.get(relationship.to) ?? relationship.to)}：${escapeHtml(formatText(relationship.label))}</p>`).join('')}`
+  const decisions = edition.decisions.map((decision) => `<section><h3>${escapeHtml(formatText(decision.title))}</h3>${paragraphHtml(decision.prompt, formatText)}<p>分支：${escapeHtml(decision.branches.map((branch) => plain(formatText(branch))).join(' / '))}</p><p>解读：${escapeHtml(formatText(decision.note))}</p></section>`).join('')
+  const endings = edition.endings.map((ending) => `<section><h3>${escapeHtml(formatText(ending.title))}</h3><p>条件：${escapeHtml(formatText(ending.condition))}</p><p>解读：${escapeHtml(formatText(ending.reading))}</p></section>`).join('')
+  const dlc = edition.dlcCards.map((card) => `<section><h3>${escapeHtml(card.label)} · ${escapeHtml(formatText(card.title))}</h3>${paragraphHtml(card.body, formatText)}</section>`).join('') + edition.dlcThemes.map((theme) => `<section><h3>${escapeHtml(formatText(theme.label))}</h3><p>本体：${escapeHtml(formatText(theme.base))}</p><p>DLC：${escapeHtml(formatText(theme.dlc))}</p></section>`).join('')
+  const method = analysisSteps.map((step) => `<section><h3>${escapeHtml(step.number)} · ${escapeHtml(formatText(step.title))}</h3>${paragraphHtml(step.body, formatText)}</section>`).join('') + `<h3>先问这六个问题</h3>${methodQuestions.map((question, questionIndex) => `<p>${String(questionIndex + 1).padStart(2, '0')} · ${escapeHtml(formatText(question))}</p>`).join('')}`
 
-  return `<article id="edition-${index}"><h1>${escapeHtml(edition.label)}</h1><p class="meta">${escapeHtml(edition.scopeLabel)}</p>${paragraphHtml(edition.opening)}<h2>序</h2>${paragraphHtml(edition.preface)}<nav><h2>目录</h2><ol>${toc}</ol></nav><h2>正文</h2>${edition.chapters.map(chapterHtml).join('')}<h2>附录 · 人物关系</h2>${people}<h2>附录 · 选择与结局</h2>${decisions}${endings}<h2>附录 · DLC 对照</h2>${dlc}<h2>附录 · 分析方法</h2>${paragraphHtml(edition.methodIntro)}${method}</article>`
+  return `<article id="edition-${index}"><h1>${escapeHtml(edition.label)}</h1><p class="meta">${escapeHtml(edition.scopeLabel)}</p>${paragraphHtml(edition.opening, formatText)}<h2>序</h2>${paragraphHtml(edition.preface, formatText)}<nav><h2>目录</h2><ol>${toc}</ol></nav><h2>正文</h2>${edition.chapters.map((chapter) => chapterHtml(chapter, formatText)).join('')}<h2>附录 · 人物关系</h2>${people}<h2>附录 · 选择与结局</h2>${decisions}${endings}<h2>附录 · DLC 对照</h2>${dlc}<h2>附录 · 分析方法</h2>${paragraphHtml(edition.methodIntro, formatText)}${method}</article>`
 }
 
 function buildBookXhtml(editions: ExportEdition[]) {

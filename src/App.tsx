@@ -3,6 +3,7 @@ import { ArrowUpRight, BookOpen, ChevronRight, Download, Menu, Network, RotateCc
 import { analysisSteps, chapters, characters, decisions, dlcThemes, endings, methodQuestions, relationships } from './data'
 import { cyberpunkChapters, cyberpunkCharacters, cyberpunkDecisions, cyberpunkDlcThemes, cyberpunkEndings, cyberpunkRelationships } from './cyberpunkData'
 import { buildEpub, buildTextBook } from './export'
+import { createNarrativeFormatter, formatChineseText } from './text'
 import type { Chapter, Character, Relationship } from './data'
 
 type ViewId = 'read' | 'contents' | 'appendix'
@@ -92,6 +93,7 @@ function App() {
   const [readerToolsOpen, setReaderToolsOpen] = useState(false)
   const [readerSettings, setReaderSettings] = useState<ReaderSettings>(loadReaderSettings)
   const edition = editions[editionId]
+  const formatNarrativeText = createNarrativeFormatter()
 
   useEffect(() => { window.localStorage.setItem(readerSettingsKey, JSON.stringify(readerSettings)) }, [readerSettings])
 
@@ -119,7 +121,7 @@ function App() {
       <button className={`reader-tools-button ${readerToolsOpen ? 'is-active' : ''}`} onClick={() => setReaderToolsOpen((open) => !open)} aria-expanded={readerToolsOpen} aria-controls="reader-tools"><SlidersHorizontal size={16} /><span>阅读工具</span></button>
     </header>
     {readerToolsOpen && <ReaderTools edition={edition} settings={readerSettings} setSettings={setReaderSettings} onClose={() => setReaderToolsOpen(false)} />}
-    <div className="book-layout"><TableOfContents edition={edition} editionId={editionId} activeView={view} open={tocOpen} onEdition={changeEdition} onRead={openRead} onAppendix={openAppendix} /><main className="book-main">{view === 'read' && <ReadingView edition={edition} onAppendix={openAppendix} />}{view === 'contents' && <ContentsView edition={edition} onRead={openRead} />}{view === 'appendix' && <AppendixView edition={edition} activeTab={appendixTab} onTab={setAppendixTab} />}</main><ReadingRail edition={edition} view={view} /></div>
+    <div className="book-layout"><TableOfContents edition={edition} editionId={editionId} activeView={view} open={tocOpen} onEdition={changeEdition} onRead={openRead} onAppendix={openAppendix} /><main className="book-main">{view === 'read' && <ReadingView edition={edition} onAppendix={openAppendix} formatText={formatNarrativeText} />}{view === 'contents' && <ContentsView edition={edition} onRead={openRead} />}{view === 'appendix' && <AppendixView edition={edition} activeTab={appendixTab} onTab={setAppendixTab} />}</main><ReadingRail edition={edition} view={view} /></div>
     <footer className="book-footer"><span>GAME / ARCHIVE</span><span>一份连续阅读的剧情档案</span><span>2026</span></footer>
   </div>
 }
@@ -160,11 +162,11 @@ function TableOfContents({ edition, editionId, activeView, open, onEdition, onRe
 
 function ReadingRail({ edition, view }: { edition: GameEdition; view: ViewId }) { return <aside className="reading-rail" aria-label="阅读信息"><div className="rail-rule" /><span className="rail-label">READING EDITION</span><strong>{view === 'read' ? '连续阅读' : view === 'contents' ? '章节目录' : '辅助附录'}</strong><p>{view === 'read' ? '把它当成一本书。从一页读到下一页，先让故事自己展开。' : '这里的工具不替正文讲故事，只在你需要回看时提供索引。'}</p><div className="rail-rule rail-rule-bottom" /><span className="rail-label">CURRENT TEXT</span><span className="rail-current">{edition.railCurrent}</span></aside> }
 
-function ReadingView({ edition, onAppendix }: { edition: GameEdition; onAppendix: (tab?: AppendixTab) => void }) {
-  return <div className="reading-view"><section className="book-opening"><span className="opening-kicker">{edition.kicker}</span><h1>{edition.titleLead}<br /><em>{edition.titleEmphasis}</em>的旅程</h1><p>{formatChineseText(edition.opening)}</p><div className="opening-meta"><span>{edition.scopeLabel}</span><span>全剧透</span><span>{edition.readingTime}</span></div></section><article className="continuous-story"><div className="story-preface"><span className="chapter-number">序</span><p>{formatChineseText(edition.preface)}</p></div>{edition.chapters.map((chapter, index) => <ChapterBlock chapter={chapter} number={index + 1} total={edition.chapters.length} key={chapter.id} />)}</article><section className="reading-end"><span className="opening-kicker">THE END IS ANOTHER BEGINNING</span><h2>读完正文，再去看那些图。</h2><p>人物关系、选择矩阵和分析方法都放在附录里。它们不是另一套入口，而是读完故事之后，帮你回头看清结构的工具。</p><div className="appendix-links"><button onClick={() => onAppendix('people')}>人物关系 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('choices')}>选择与结局 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('method')}>分析方法 <ArrowUpRight size={14} /></button></div></section></div>
+function ReadingView({ edition, onAppendix, formatText }: { edition: GameEdition; onAppendix: (tab?: AppendixTab) => void; formatText: (value: string) => string }) {
+  return <div className="reading-view"><section className="book-opening"><span className="opening-kicker">{edition.kicker}</span><h1>{edition.titleLead}<br /><em>{edition.titleEmphasis}</em>的旅程</h1><p>{formatText(edition.opening)}</p><div className="opening-meta"><span>{edition.scopeLabel}</span><span>全剧透</span><span>{edition.readingTime}</span></div></section><article className="continuous-story"><div className="story-preface"><span className="chapter-number">序</span><p>{formatText(edition.preface)}</p></div>{edition.chapters.map((chapter, index) => <ChapterBlock chapter={chapter} number={index + 1} total={edition.chapters.length} formatText={formatText} key={chapter.id} />)}</article><section className="reading-end"><span className="opening-kicker">THE END IS ANOTHER BEGINNING</span><h2>读完正文，再去看那些图。</h2><p>人物关系、选择矩阵和分析方法都放在附录里。它们不是另一套入口，而是读完故事之后，帮你回头看清结构的工具。</p><div className="appendix-links"><button onClick={() => onAppendix('people')}>人物关系 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('choices')}>选择与结局 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('method')}>分析方法 <ArrowUpRight size={14} /></button></div></section></div>
 }
 
-function ChapterBlock({ chapter, number, total }: { chapter: Chapter; number: number; total: number }) { return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{formatChineseText(chapter.region)}</span><h2>{formatChineseText(chapter.title)}</h2><p>{formatChineseText(chapter.subtitle)}</p></div></header><div className="story-prose">{chapter.body.map((paragraph, index) => <p className={storyParagraphClass(paragraph)} key={`${chapter.id}-${index}`}>{formatChineseText(paragraph)}</p>)}</div><aside className="hard-question"><span>这一章留下的问题</span><strong>{formatChineseText(chapter.question)}</strong></aside><div className="chapter-tail"><span>{chapter.tags.map(formatChineseText).join('  ·  ')}</span><span>{String(number).padStart(2, '0')} / {String(total).padStart(2, '0')}</span></div></section> }
+function ChapterBlock({ chapter, number, total, formatText }: { chapter: Chapter; number: number; total: number; formatText: (value: string) => string }) { return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{formatText(chapter.region)}</span><h2>{formatText(chapter.title)}</h2><p>{formatText(chapter.subtitle)}</p></div></header><div className="story-prose">{chapter.body.map((paragraph, index) => <p className={storyParagraphClass(paragraph)} key={`${chapter.id}-${index}`}>{formatText(paragraph)}</p>)}</div><aside className="hard-question"><span>这一章留下的问题</span><strong>{formatText(chapter.question)}</strong></aside><div className="chapter-tail"><span>{chapter.tags.map(formatText).join('  ·  ')}</span><span>{String(number).padStart(2, '0')} / {String(total).padStart(2, '0')}</span></div></section> }
 
 function storyParagraphClass(paragraph: string) { if (paragraph.startsWith('>')) return 'story-quote'; if (paragraph.startsWith('【确定】') || paragraph.startsWith('[确定]')) return 'story-fact'; if (paragraph.startsWith('【很可能】') || paragraph.startsWith('[很可能]')) return 'story-reading'; if (/^(选择|如果|与此同时|最终|现在再看|结局|路线|所以我的判断|这就是|真正的)/.test(paragraph)) return 'story-turn'; return '' }
 
@@ -183,26 +185,5 @@ function MethodAppendix({ edition }: { edition: GameEdition }) { return <section
 function chapterGroups(chaptersForEdition: Chapter[]) { return [{ title: '本体 · 旅程', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'main') }, { title: '本体 · 支线', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'side') }, { title: '扩展 · DLC', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'dlc') }].filter((group) => group.entries.length > 0) }
 
 function mapPositions(editionId: EditionId, people: Character[]) { const preset: Record<EditionId, Record<string, { x: number; y: number }>> = { witcher3: { geralt: { x: 380, y: 160 }, ciri: { x: 210, y: 72 }, yennefer: { x: 560, y: 66 }, triss: { x: 630, y: 190 }, vesemir: { x: 190, y: 260 }, dandelion: { x: 520, y: 300 }, baron: { x: 77, y: 180 }, olivier: { x: 770, y: 80 }, olgierd: { x: 760, y: 195 }, regis: { x: 650, y: 330 }, dettlaff: { x: 815, y: 320 }, anna: { x: 785, y: 420 } }, cyberpunk2077: { v: { x: 380, y: 160 }, johnny: { x: 210, y: 72 }, jackie: { x: 110, y: 255 }, judy: { x: 620, y: 65 }, panam: { x: 680, y: 180 }, rogue: { x: 590, y: 320 }, songbird: { x: 170, y: 410 }, reed: { x: 390, y: 405 }, yorinobu: { x: 780, y: 85 }, hanako: { x: 790, y: 210 }, myers: { x: 760, y: 365 } } }; const fallback = people.reduce<Record<string, { x: number; y: number }>>((positions, person, index) => ({ ...positions, [person.id]: { x: 90 + (index % 5) * 175, y: 70 + Math.floor(index / 5) * 190 } }), {}); return { ...fallback, ...preset[editionId] } }
-
-const officialTranslations: [string, string][] = [
-  ['冈特·欧迪姆', '刚特·欧迪姆'], ['欧迪姆', '刚特·欧迪姆'], ['Gaunter O’Dimm', '刚特·欧迪姆'], ['Gaunter O\'Dimm', '刚特·欧迪姆'], ['O’Dimm', '刚特·欧迪姆'],
-  ['Philip Strenger', '菲利普·斯特伦格'], ['Keira Metz', '凯拉·梅兹'], ['Avallac’h', '阿瓦拉克'], ['Avallac\'h', '阿瓦拉克'],
-  ['Elder Blood', '上古之血'], ['White Orchard', '白果园'], ['Botchling', '尸婴'], ['Lubberkin', '家宅精灵'], ['Crones', '林中夫人'],
-  ['Nathaniel', '纳撒尼尔'], ['Hubert', '休伯特'], ['Cerys', '凯瑞丝'], ['Hjalmar', '哈尔玛'], ['Svanrige', '斯凡里吉'],
-  ['Crach an Craite', '克拉奇·安·克莱特'], ['an Craite', '安·克莱特'], ['Undvik', '安德维克'], ['Spikeroog', '史派克鲁格'], ['Jarl Udalryk', '乌达里克领主'], ['Kaer Trolde', '凯尔·特罗德'],
-  ['Skjall', '斯凯尔'], ['Uma', '乌马'], ['Isle of Mists', '迷雾之岛'], ['Eredin', '艾瑞汀'], ['Imlerith', '伊勒瑞斯'], ['Weavess', '织婆'], ['White Frost', '白霜'],
-  ['欧吉尔德·冯·爱维瑞克', '欧吉尔德·冯·埃弗雷克'], ['欧吉尔德', '欧吉尔德·冯·埃弗雷克'], ['Roche', '罗契'], ['Dijkstra', '迪科斯彻'], ['Olgierd von Everec', '欧吉尔德·冯·埃弗雷克'], ['Olgierd', '欧吉尔德·冯·埃弗雷克'], ['Iris von Everec', '爱丽丝·冯·埃弗雷克'], ['Vlodimir', '弗洛迪米尔'],
-  ['Ofieri Prince', '欧菲尔王子'], ['Maximilian Borsodi', '马克西米利安·波索迪'], ['Ewald Borsodi', '埃瓦尔德·波索迪'], ['Orianna', '欧立安娜'], ['Land of a Thousand Fables', '千童话之地'], ['Tesham Mutna', '特沙姆·穆特纳'],
-  ['Syanna', '席安娜'], ['Dettlaff', '狄拉夫'], ['Regis', '雷吉斯'], ['The Night of Long Fangs', '长牙之夜'], ['Anna', '安娜'], ['Tamara', '塔玛拉'], ['Ciri', '希里'], ['Dandelion', '丹德里恩'], ['Triss Merigold', '特莉丝·梅莉葛德'], ['Zoltan', '卓尔坦·齐瓦'], ['Corinne Tilly', '柯琳·蒂莉'], ['Birna Bran', '比尔娜·布兰'], ['Menge', '曼吉'], ['Priscilla', '普西拉'], ['Sara', '莎拉'], ['Whoreson Junior', '霍桑二世'],
-  ['Jackie Welles', '杰克·威尔斯'], ['Dexter DeShawn', '德克斯特·德肖恩'], ['Evelyn Parker', '伊芙琳·帕克'], ['Yorinobu Arasaka', '赖宣·荒坂'], ['Saburo Arasaka', '荒坂三郎'], ['Johnny Silverhand', '强尼·银手'], ['Viktor Vektor', '维克多·维克托'], ['Alt Cunningham', '奥特·坎宁安'], ['Goro Takemura', '竹村五郎'], ['Judy Alvarez', '朱迪·阿尔瓦雷兹'], ['Panam Palmer', '帕南·帕尔默'], ['Aldecaldos', '阿德卡多'], ['Rogue Amendiares', '罗格·阿曼迪亚斯'], ['Song So Mi', '百灵鸟'], ['Songbird', '百灵鸟'], ['Solomon Reed', '所罗门·李德'], ['Rosalind Myers', '罗莎琳德·迈尔斯'], ['Kurt Hansen', '库尔特·汉森'],
-]
-
-const officialTranslationMap = new Map(officialTranslations)
-const officialTranslationPattern = new RegExp(officialTranslations.map(([source]) => source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length).join('|'), 'g')
-
-function formatChineseText(value: string) {
-  const text = value.replace(officialTranslationPattern, (match) => officialTranslationMap.get(match) ?? match)
-  return text.replace(/“([^”]+)”/g, '「$1」').replace(/"([^"]+)"/g, '「$1」').replace(/\.{3}/g, '……').replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, '$1 $2').replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, '$1 $2').replace(/ {2,}/g, ' ')
-}
 
 export default App
