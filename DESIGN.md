@@ -22,9 +22,11 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 
 ## Typography
 
-- Display and long-form reading: `Newsreader`, with `Songti SC`, `STSong`, and Georgia fallbacks.
-- UI and navigation: `Instrument Sans`, with PingFang SC, Noto Sans CJK SC, and system fallbacks.
-- Reading paragraphs use a narrow measure, generous line-height, and a calm weight. Metadata is small and tracked, but never competes with the body copy.
+- Display and chapter titles: `Newsreader`, with `Songti SC`, `STSong`, and Georgia fallbacks.
+- Chinese正文: the system CJK sans stack (`PingFang SC`, `Hiragino Sans GB`, `Microsoft YaHei`, `Noto Sans CJK SC`) with a narrow measure and approximately 2 倍 line-height. This keeps mixed Chinese, numbers, and Latin names stable on phones.
+- UI and navigation: `Instrument Sans`, with system CJK fallbacks.
+- Chinese copy follows the spacing and punctuation conventions from [少数派写作排版指南](https://sspai.com/post/37815): Chinese and Latin/数字之间留半角空格，不用段首空格，使用「」与……，长文不依赖粗体和彩色标记制造层级。
+- Reading paragraphs are left-aligned, without first-line indentation, and separated by a consistent paragraph rhythm. Metadata is small and tracked, but never competes with the body copy.
 - Chapter titles are allowed to be large and editorial; labels stay compact so the page still reads like a book.
 
 ## Layout
@@ -38,7 +40,7 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 ## Components
 
 - Book header: generic archive identity, current mode, and three simple destinations: 阅读、目录、附录。
-- Table of contents: grouped chapter list for main story, side stories, and DLC; selected state is a rule and text treatment.
+- Table of contents: grouped chapter list for main story, side stories, and DLC, with a lightweight work switcher for the current game; selected state is a rule and text treatment.
 - Continuous chapter block: region, title, subtitle, summary, factual note, interpretation, hard question, tags, and folio count.
 - Reading end: a quiet handoff to the appendix, making the transition from narrative to reference explicit.
 - Appendix tabs: 人物关系、选择与结局、DLC 对照、分析方法。
@@ -53,7 +55,7 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 
 ## Content grammar
 
-The content model separates `fact`, `reading`, `question`, `tags`, `kind`, and `region`. This is the central reusable seam for future games. New games should be added as data first, then connected to shared reading and appendix surfaces. The reader-facing voice distinguishes `【确定】` from `【推断】` so evidence and interpretation never blur together.
+The content model separates `fact`, `reading`, `question`, `tags`, `kind`, and `region`. This is the central reusable seam for future games. Both `巫师 3：狂猎` and `赛博朋克 2077：往日之影` use the same reading and appendix surfaces. New games should be added as data first, then connected to shared reading and appendix surfaces. The reader-facing voice distinguishes `【确定】` from `【很可能】` / `【推断】` so evidence and interpretation never blur together. Official Chinese name normalization happens at the display boundary, keeping source data editable while ensuring the reader never sees accidental English-only names.
 
 ## Complexity deliberately removed
 

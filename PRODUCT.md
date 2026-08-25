@@ -12,11 +12,11 @@ delegated: React + TypeScript + Vite, with local structured content and no backe
 
 ## Users
 
-The primary user is the requester, reading on a phone or laptop to revisit and understand the full narrative of The Witcher 3. A secondary audience is future readers who want a spoiler-aware, analytical guide rather than a completionist walkthrough.
+The primary user is the requester, reading on a phone or laptop to revisit and understand full game narratives. The first two editions are The Witcher 3 and Cyberpunk 2077. A secondary audience is future readers who want a spoiler-aware, analytical guide rather than a completionist walkthrough.
 
 ## Product Purpose
 
-Preserve and publish a high-quality, full-spoiler analysis of The Witcher 3: Wild Hunt, including the base game, Hearts of Stone, and Blood and Wine. The main experience is a continuous, novel-like reading journey: the reader should be able to start at the beginning and follow the story, motives, choices, consequences, and themes without repeatedly leaving the prose.
+Preserve and publish high-quality, full-spoiler analyses of The Witcher 3: Wild Hunt and Cyberpunk 2077, including Hearts of Stone / Blood and Wine and Phantom Liberty. The main experience is a continuous, novel-like reading journey: the reader should be able to start at the beginning and follow the story, motives, choices, consequences, and themes without repeatedly leaving the prose.
 
 ## Positioning
 
@@ -29,14 +29,14 @@ The site is a personal reading archive and reviewable static web project. It sho
 ## Capabilities and Constraints
 
 - Full spoilers are allowed, with a clear spoiler warning before entry.
-- Scope includes the complete main arc, important side stories, Hearts of Stone, and Blood and Wine.
+- Scope includes the complete authored reading arc, important side stories, and the relevant DLC for each edition: Hearts of Stone and Blood and Wine for The Witcher 3; Phantom Liberty for Cyberpunk 2077.
 - The reference conversation's style is preserved: chapter-led explanation, factual versus interpretive labels, deliberate pauses at moral dilemmas, and thematic synthesis.
 - The reading view presents the complete story as one continuous sequence. Chapter headings, rules, and a small folio counter provide rhythm without turning every section into a card.
 - The table of contents is a locating tool, not a replacement for the prose. It groups main story, side stories, and DLC chapters.
 - The appendix contains the character relationship map, choice-to-ending map, ending matrix, DLC comparison, and reusable game-analysis method.
 - Content and interface are separated so future games can be added without rewriting the navigation system.
 - The first review build is static and local; no authentication, database, or user accounts are required.
-- Chinese is the primary reading language; English names may appear alongside key names on first use.
+- Chinese is the primary reading language. Character names use a normalized official Chinese display vocabulary; English-only names are not shown in the reading surface.
 
 ## Brand Commitments
 
