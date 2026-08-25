@@ -16,8 +16,9 @@
   --accent-light: #ceb98c;
   --blue: #607f8c;
   --red: #a45e4f;
-  --serif: 'Newsreader', 'Noto Serif SC', 'Songti SC', 'STSong', Georgia, serif;
-  --reading: 'Noto Serif SC', 'Songti SC', 'STSong', 'Source Han Serif SC', 'Noto Serif CJK SC', serif;
+  /* 苍耳今楷是阅读正文的第一字体；其余名称兼容常见的字体族/官方字族命名。 */
+  --serif: 'Newsreader', '苍耳今楷', '仓耳今楷', 'TsangerJinKai', 'TsangerJinKai01', 'Songti SC', 'STSong', 'Noto Serif SC', Georgia, serif;
+  --reading: '苍耳今楷', '仓耳今楷', 'TsangerJinKai', 'TsangerJinKai01', 'Songti SC', 'STSong', 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', serif;
   --cjk: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
 }
 
