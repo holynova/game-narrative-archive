@@ -16,29 +16,31 @@ The primary user is the requester, reading on a phone or laptop to revisit and u
 
 ## Product Purpose
 
-Preserve and publish a high-quality, full-spoiler analysis of The Witcher 3: Wild Hunt, including the base game, Hearts of Stone, and Blood and Wine. Success means the reader can understand what happened, why characters acted as they did, how choices propagate, and what themes connect the whole game.
+Preserve and publish a high-quality, full-spoiler analysis of The Witcher 3: Wild Hunt, including the base game, Hearts of Stone, and Blood and Wine. The main experience is a continuous, novel-like reading journey: the reader should be able to start at the beginning and follow the story, motives, choices, consequences, and themes without repeatedly leaving the prose.
 
 ## Positioning
 
-This is a narrative archive that treats game stories as interconnected systems: chronology, character motives, moral choices, downstream consequences, endings, and themes are readable as both prose and maps. Its distinctive mechanism is the combination of long-form interpretation with explorable relationship and decision graphs.
+This is a reading archive for game narratives, not a mission checklist or dashboard. The story is the primary artifact. The table of contents helps a reader find a chapter, while relationship maps, choice graphs, ending comparisons, DLC contrasts, and the reusable analysis method live in an appendix for reference after or between reading sessions.
 
 ## Operating Context
 
-The site is a personal reading archive and reviewable local web project. It should work as a static build, be comfortable on a phone, support deep reading in sections, and remain easy to extend with another game using the same analysis template.
+The site is a personal reading archive and reviewable static web project. It should be comfortable on a phone, support long uninterrupted reading, keep chapter landmarks visible, and remain easy to extend with another game using the same analysis template.
 
 ## Capabilities and Constraints
 
 - Full spoilers are allowed, with a clear spoiler warning before entry.
 - Scope includes the complete main arc, important side stories, Hearts of Stone, and Blood and Wine.
 - The reference conversation's style is preserved: chapter-led explanation, factual versus interpretive labels, deliberate pauses at moral dilemmas, and thematic synthesis.
-- The first build should include a story roadmap, character/faction relationship map, choice-to-ending map, ending matrix, DLC comparison, and a reusable game-analysis method.
-- Content and interface must be separated so future games can be added without rewriting the navigation system.
+- The reading view presents the complete story as one continuous sequence. Chapter headings, rules, and a small folio counter provide rhythm without turning every section into a card.
+- The table of contents is a locating tool, not a replacement for the prose. It groups main story, side stories, and DLC chapters.
+- The appendix contains the character relationship map, choice-to-ending map, ending matrix, DLC comparison, and reusable game-analysis method.
+- Content and interface are separated so future games can be added without rewriting the navigation system.
 - The first review build is static and local; no authentication, database, or user accounts are required.
 - Chinese is the primary reading language; English names may appear alongside key names on first use.
 
 ## Brand Commitments
 
-The voice is thoughtful, direct, spoiler-aware, and willing to make a judgment while distinguishing confirmed facts from interpretation. The site should feel like an authored archive rather than a generic wiki or checklist walkthrough.
+The voice is thoughtful, direct, spoiler-aware, and willing to make a judgment while distinguishing confirmed facts from interpretation. The site should feel like an authored book with useful back matter, rather than a generic wiki or checklist walkthrough.
 
 ## Evidence on Hand
 
@@ -48,12 +50,13 @@ The voice is thoughtful, direct, spoiler-aware, and willing to make a judgment w
 
 ## Product Principles
 
-1. Explain the story as a chain of motives and consequences, not a list of missions.
-2. Separate what the game confirms from what the analysis infers.
-3. Treat side quests and DLC as essential narrative material when they deepen the game's themes.
-4. Let maps and diagrams reduce cognitive load without replacing readable prose.
-5. Make the content model reusable for future games.
+1. 连续阅读优先：读者能从开篇一路读下去，不被工具界面打断。
+2. 目录帮助定位：章节入口清楚，但目录不抢正文的位置。
+3. 事实与判断分开：标记确定信息、推断和作者的问题意识。
+4. 支线与 DLC 不降级：它们仍是完整叙事的一部分，只在阅读结构中自然展开。
+5. 图表服务理解：关系图、路线图和结局矩阵是读完后的回看工具。
+6. 内容模型可迁移：同一套章节、人物、选择和主题结构应能用于分析其他游戏。
 
 ## Accessibility & Inclusion
 
-The interface must remain readable on small screens, use visible focus states, support keyboard navigation on larger screens, preserve strong contrast, and avoid relying on color alone for relationship types, certainty labels, or choices.
+The interface must remain readable on small screens, use visible focus states, support keyboard navigation on larger screens, preserve strong contrast, and avoid relying on color alone for relationship types, certainty labels, or choices. Long-form paragraphs should use a comfortable measure and line-height, with semantic headings for screen-reader navigation.
