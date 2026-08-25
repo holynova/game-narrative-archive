@@ -22,8 +22,8 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 
 ## Typography
 
-- Display and chapter titles: `Newsreader`, with `Songti SC`, `STSong`, and Georgia fallbacks.
-- Chinese正文: the system CJK sans stack (`PingFang SC`, `Hiragino Sans GB`, `Microsoft YaHei`, `Noto Sans CJK SC`) with a narrow measure and approximately 2 倍 line-height. This keeps mixed Chinese, numbers, and Latin names stable on phones.
+- Display and chapter titles: `Newsreader`, with `Noto Serif SC`, `Songti SC`, `STSong`, and Georgia fallbacks.
+- Chinese正文: `Noto Serif SC` / Songti-style reading face, with a narrow measure and approximately 2 倍 line-height. The mobile reading surface uses a warm paper background, quieter headings, and a stable e-reader-like rhythm.
 - UI and navigation: `Instrument Sans`, with system CJK fallbacks.
 - Chinese copy follows the spacing and punctuation conventions from [少数派写作排版指南](https://sspai.com/post/37815): Chinese and Latin/数字之间留半角空格，不用段首空格，使用「」与……，长文不依赖粗体和彩色标记制造层级。
 - Reading paragraphs are left-aligned, without first-line indentation, and separated by a consistent paragraph rhythm. Metadata is small and tracked, but never competes with the body copy.
