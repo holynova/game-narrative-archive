@@ -46,12 +46,14 @@ Copper marks chapter rhythm and active navigation. Blue and red are reserved for
 - Reading end: a quiet handoff to the appendix, making the transition from narrative to reference explicit.
 - Appendix tabs: 人物关系、选择与结局、DLC 对照、分析方法。
 - Relationship mini-map: small SVG diagram paired with a text index so the topology is never the only way to access the information.
+- Reader tools: an unobtrusive header control for local reading preferences and downloading either the current work or the complete archive as TXT/EPUB.
 
 ## Interaction
 
 - Navigation changes the current reading mode without a page reload and resets the scroll position.
 - Clicking a chapter in the table of contents closes the mobile menu and moves to that chapter in the continuous story.
 - Appendix tabs switch reference material in place and preserve a clear return to reading.
+- Reader preferences are local-only, persist between visits, and change the reading column without changing the source content. EPUB exports intentionally use reader-controlled serif typography instead of embedding the website font.
 - Motion is restrained: focus, hover, and menu changes are short and subtle. Reduced-motion users receive the same information without ornamental movement.
 
 ## Content grammar

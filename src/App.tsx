@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
-import { ArrowUpRight, BookOpen, ChevronRight, Menu, Network, ScrollText, X } from 'lucide-react'
+import { useEffect, useState, type CSSProperties } from 'react'
+import { ArrowUpRight, BookOpen, ChevronRight, Download, Menu, Network, RotateCcw, ScrollText, SlidersHorizontal, X } from 'lucide-react'
 import { analysisSteps, chapters, characters, decisions, dlcThemes, endings, methodQuestions, relationships } from './data'
 import { cyberpunkChapters, cyberpunkCharacters, cyberpunkDecisions, cyberpunkDlcThemes, cyberpunkEndings, cyberpunkRelationships } from './cyberpunkData'
+import { buildEpub, buildTextBook } from './export'
 import type { Chapter, Character, Relationship } from './data'
 
 type ViewId = 'read' | 'contents' | 'appendix'
@@ -10,6 +11,34 @@ type EditionId = 'witcher3' | 'cyberpunk2077'
 type Decision = { id: string; title: string; prompt: string; branches: string[]; note: string }
 type Ending = { title: string; tone: string; condition: string; reading: string }
 type DlcTheme = { label: string; base: string; dlc: string }
+type ReaderSettings = { fontSize: number; lineHeight: number; paragraphSpacing: number; readingWidth: number }
+
+const readerSettingsKey = 'game-narrative-archive.reader-settings'
+const defaultReaderSettings: ReaderSettings = { fontSize: 17, lineHeight: 2.1, paragraphSpacing: 1.17, readingWidth: 680 }
+
+function loadReaderSettings(): ReaderSettings {
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(readerSettingsKey) ?? '{}') as Partial<ReaderSettings>
+    return { ...defaultReaderSettings, ...saved }
+  } catch {
+    return defaultReaderSettings
+  }
+}
+
+function saveBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
+function editionFilename(edition: GameEdition) {
+  return edition.id === 'witcher3' ? 'the-witcher-3' : 'cyberpunk-2077'
+}
 
 type GameEdition = {
   id: EditionId
@@ -60,7 +89,11 @@ function App() {
   const [view, setView] = useState<ViewId>('read')
   const [appendixTab, setAppendixTab] = useState<AppendixTab>('people')
   const [tocOpen, setTocOpen] = useState(false)
+  const [readerToolsOpen, setReaderToolsOpen] = useState(false)
+  const [readerSettings, setReaderSettings] = useState<ReaderSettings>(loadReaderSettings)
   const edition = editions[editionId]
+
+  useEffect(() => { window.localStorage.setItem(readerSettingsKey, JSON.stringify(readerSettings)) }, [readerSettings])
 
   useEffect(() => {
     const label = view === 'read' ? '阅读' : view === 'contents' ? '目录' : '附录'
@@ -71,15 +104,53 @@ function App() {
   const openRead = (chapterId?: string) => { setView('read'); setTocOpen(false); window.requestAnimationFrame(() => { if (chapterId) document.getElementById(chapterId)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); else window.scrollTo({ top: 0, behavior: 'smooth' }) }) }
   const openAppendix = (tab: AppendixTab = 'people') => { setAppendixTab(tab); setView('appendix'); setTocOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }
 
-  return <div className="book-app">
+  const readerStyle = {
+    '--reader-font-size': `${readerSettings.fontSize}px`,
+    '--reader-line-height': readerSettings.lineHeight,
+    '--reader-paragraph-spacing': `${readerSettings.paragraphSpacing}em`,
+    '--reader-width': `${readerSettings.readingWidth}px`,
+  } as CSSProperties & Record<string, string | number>
+
+  return <div className="book-app" style={readerStyle}>
     <header className="book-header">
       <div className="book-identity"><button className="mobile-menu-button" onClick={() => setTocOpen((open) => !open)} aria-label={tocOpen ? '关闭目录' : '打开目录'}>{tocOpen ? <X size={18} /> : <Menu size={18} />}</button><button className="identity-copy" onClick={() => openRead()}><span className="identity-mark">GAME / ARCHIVE</span><span className="identity-name">游戏剧情档案馆</span></button></div>
       <nav className="book-nav" aria-label="主导航"><button className={view === 'read' ? 'is-active' : ''} onClick={() => openRead()}>阅读</button><button className={view === 'contents' ? 'is-active' : ''} onClick={() => { setView('contents'); setTocOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>目录</button><button className={view === 'appendix' ? 'is-active' : ''} onClick={() => openAppendix()}>附录</button></nav>
       <div className="book-edition" aria-label="选择作品">{(Object.keys(editions) as EditionId[]).map((id) => <button key={id} className={editionId === id ? 'is-active' : ''} onClick={() => changeEdition(id)}>{editions[id].shortLabel}</button>)}</div>
+      <button className={`reader-tools-button ${readerToolsOpen ? 'is-active' : ''}`} onClick={() => setReaderToolsOpen((open) => !open)} aria-expanded={readerToolsOpen} aria-controls="reader-tools"><SlidersHorizontal size={16} /><span>阅读工具</span></button>
     </header>
+    {readerToolsOpen && <ReaderTools edition={edition} settings={readerSettings} setSettings={setReaderSettings} onClose={() => setReaderToolsOpen(false)} />}
     <div className="book-layout"><TableOfContents edition={edition} editionId={editionId} activeView={view} open={tocOpen} onEdition={changeEdition} onRead={openRead} onAppendix={openAppendix} /><main className="book-main">{view === 'read' && <ReadingView edition={edition} onAppendix={openAppendix} />}{view === 'contents' && <ContentsView edition={edition} onRead={openRead} />}{view === 'appendix' && <AppendixView edition={edition} activeTab={appendixTab} onTab={setAppendixTab} />}</main><ReadingRail edition={edition} view={view} /></div>
     <footer className="book-footer"><span>GAME / ARCHIVE</span><span>一份连续阅读的剧情档案</span><span>2026</span></footer>
   </div>
+}
+
+function ReaderTools({ edition, settings, setSettings, onClose }: { edition: GameEdition; settings: ReaderSettings; setSettings: (settings: ReaderSettings) => void; onClose: () => void }) {
+  const [status, setStatus] = useState('')
+  const update = (key: keyof ReaderSettings, value: number) => setSettings({ ...settings, [key]: value })
+  const reset = () => setSettings(defaultReaderSettings)
+  const downloadText = (all: boolean) => {
+    const scope = all ? Object.values(editions) : [edition]
+    saveBlob(new Blob([`\ufeff${buildTextBook(scope)}`], { type: 'text/plain;charset=utf-8' }), all ? 'game-narrative-archive.txt' : `${editionFilename(edition)}-story.txt`)
+    setStatus(all ? '完整档案 TXT 已生成' : '当前作品 TXT 已生成')
+  }
+  const downloadEpub = (all: boolean) => {
+    const scope = all ? Object.values(editions) : [edition]
+    saveBlob(buildEpub(scope), all ? 'game-narrative-archive.epub' : `${editionFilename(edition)}-story.epub`)
+    setStatus(all ? '完整档案 EPUB 已生成' : '当前作品 EPUB 已生成')
+  }
+
+  return <aside className="reader-tools" id="reader-tools" aria-label="阅读工具">
+    <div className="reader-tools-heading"><div><span className="reader-tools-label">READER TOOLS</span><h2>把它读成你的书</h2></div><button className="reader-tools-close" onClick={onClose} aria-label="关闭阅读工具"><X size={17} /></button></div>
+    <div className="reader-settings-grid">
+      <label><span>字号</span><output>{settings.fontSize}px</output><input type="range" min="15" max="24" step="1" value={settings.fontSize} onChange={(event) => update('fontSize', Number(event.target.value))} /></label>
+      <label><span>行距</span><output>{settings.lineHeight.toFixed(1)} 倍</output><input type="range" min="1.6" max="2.5" step="0.1" value={settings.lineHeight} onChange={(event) => update('lineHeight', Number(event.target.value))} /></label>
+      <label><span>段落间距</span><output>{settings.paragraphSpacing.toFixed(2)} 倍</output><input type="range" min="0.6" max="1.8" step="0.05" value={settings.paragraphSpacing} onChange={(event) => update('paragraphSpacing', Number(event.target.value))} /></label>
+      <label><span>阅读宽度</span><output>{settings.readingWidth}px</output><input type="range" min="560" max="780" step="10" value={settings.readingWidth} onChange={(event) => update('readingWidth', Number(event.target.value))} /></label>
+    </div>
+    <div className="reader-tools-divider" />
+    <div className="reader-export"><div><span className="reader-tools-label">EXPORT BOOK</span><h3>下载成书</h3></div><p>EPUB 会使用阅读器自己的字体与主题，适合导入微信读书、Apple Books 或其他阅读器。</p><div className="export-row"><span>当前作品</span><button onClick={() => downloadText(false)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(false)}><Download size={14} /> EPUB</button></div><div className="export-row"><span>完整档案馆</span><button onClick={() => downloadText(true)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(true)}><Download size={14} /> EPUB</button></div>{status && <p className="reader-tool-status" role="status">{status}</p>}</div>
+    <button className="reader-reset" onClick={reset}><RotateCcw size={13} /> 恢复默认排版</button>
+  </aside>
 }
 
 function TableOfContents({ edition, editionId, activeView, open, onEdition, onRead, onAppendix }: { edition: GameEdition; editionId: EditionId; activeView: ViewId; open: boolean; onEdition: (id: EditionId) => void; onRead: (chapterId?: string) => void; onAppendix: (tab?: AppendixTab) => void }) {
