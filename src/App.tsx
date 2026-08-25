@@ -2,13 +2,14 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { ArrowUpRight, BookOpen, ChevronRight, Download, Menu, Network, RotateCcw, ScrollText, SlidersHorizontal, X } from 'lucide-react'
 import { analysisSteps, chapters, characters, decisions, dlcThemes, endings, methodQuestions, relationships } from './data'
 import { cyberpunkChapters, cyberpunkCharacters, cyberpunkDecisions, cyberpunkDlcThemes, cyberpunkEndings, cyberpunkRelationships } from './cyberpunkData'
+import { gta5Chapters, gta5Characters, gta5Decisions, gta5DlcThemes, gta5Endings, gta5Relationships } from './gta5Data'
 import { buildEpub, buildTextBook } from './export'
 import { createNarrativeFormatter, formatChineseText } from './text'
 import type { Chapter, Character, Relationship } from './data'
 
 type ViewId = 'read' | 'contents' | 'appendix'
 type AppendixTab = 'people' | 'choices' | 'dlc' | 'method'
-type EditionId = 'witcher3' | 'cyberpunk2077'
+type EditionId = 'witcher3' | 'cyberpunk2077' | 'gta5'
 type Decision = { id: string; title: string; prompt: string; branches: string[]; note: string }
 type Ending = { title: string; tone: string; condition: string; reading: string }
 type DlcTheme = { label: string; base: string; dlc: string }
@@ -38,7 +39,9 @@ function saveBlob(blob: Blob, filename: string) {
 }
 
 function editionFilename(edition: GameEdition) {
-  return edition.id === 'witcher3' ? 'the-witcher-3' : 'cyberpunk-2077'
+  if (edition.id === 'witcher3') return 'the-witcher-3'
+  if (edition.id === 'cyberpunk2077') return 'cyberpunk-2077'
+  return 'gta-5'
 }
 
 type GameEdition = {
@@ -82,6 +85,12 @@ const editions: Record<EditionId, GameEdition> = {
     opening: '从夜之城的第一场大买卖，到 V 被迫决定谁有权继续使用自己的身体。这里把本体和《往日之影》放在一条连续的阅读线上。', scopeLabel: '本体 + 往日之影', readingTime: '约 35 分钟',
     preface: '《赛博朋克 2077》的真正主线，不是 V 如何打败荒坂，而是当身体、记忆和人格都可能被改写时，V 还能否保留决定由谁承担代价的权利。', railCurrent: '本体 + 往日之影', chapters: cyberpunkChapters, characters: cyberpunkCharacters, relationships: cyberpunkRelationships, decisions: cyberpunkDecisions, endings: cyberpunkEndings, dlcThemes: cyberpunkDlcThemes,
     dlcCards: [{ label: 'DLC', title: '往日之影', body: '把求生问题推进成间谍惊悚：每个救命的人，都可能在利用你。' }, { label: 'END', title: '高塔', body: 'V 真的被治好，却不能再回到曾经定义自己的生活。' }], methodIntro: '把这套读法继续带到下一款游戏：先找问题，再追踪动机、选择与代价。',
+  },
+  gta5: {
+    id: 'gta5', label: '《GTA 5》', shortLabel: 'GTA 5', kicker: 'GRAND THEFT AUTO V / LOS SANTOS', titleLead: '一场关于', titleEmphasis: '如何逃离',
+    opening: '从北扬克顿的一场假死，到洛圣都最后一个电话。这里把麦可、富兰克林和崔佛放回同一条连续阅读线上，也把一座永远不会停止运转的城市读成一个角色。', scopeLabel: '本体 · 无单人剧情 DLC', readingTime: '约 35 分钟',
+    preface: '《GTA 5》的真正主线，不是三个人如何赚到最后一笔钱，而是当每个人都把背叛解释成生存时，富兰克林能不能拒绝继承他们的全部债务。', railCurrent: '本体 + GTA Online 关联', chapters: gta5Chapters, characters: gta5Characters, relationships: gta5Relationships, decisions: gta5Decisions, endings: gta5Endings, dlcThemes: gta5DlcThemes,
+    dlcCards: [{ label: 'NOTE', title: '单人剧情 DLC', body: '《GTA 5》没有正式发布单人剧情 DLC。本档案把《GTA Online》作为同一城市的线上延展说明，不把它伪装成三位主角的线性续章。' }, { label: 'ONLINE', title: 'GTA Online', body: '从三位主角的犯罪故事，扩展成玩家自己经营组织、资产和声望的持续世界。' }], methodIntro: '把这套读法带到下一款游戏：先问人物如何被系统塑造，再追踪他们把代价交给了谁。',
   },
 }
 
@@ -184,6 +193,6 @@ function MethodAppendix({ edition }: { edition: GameEdition }) { return <section
 
 function chapterGroups(chaptersForEdition: Chapter[]) { return [{ title: '本体 · 旅程', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'main') }, { title: '本体 · 支线', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'side') }, { title: '扩展 · DLC', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'dlc') }].filter((group) => group.entries.length > 0) }
 
-function mapPositions(editionId: EditionId, people: Character[]) { const preset: Record<EditionId, Record<string, { x: number; y: number }>> = { witcher3: { geralt: { x: 380, y: 160 }, ciri: { x: 210, y: 72 }, yennefer: { x: 560, y: 66 }, triss: { x: 630, y: 190 }, vesemir: { x: 190, y: 260 }, dandelion: { x: 520, y: 300 }, baron: { x: 77, y: 180 }, olivier: { x: 770, y: 80 }, olgierd: { x: 760, y: 195 }, regis: { x: 650, y: 330 }, dettlaff: { x: 815, y: 320 }, anna: { x: 785, y: 420 } }, cyberpunk2077: { v: { x: 380, y: 160 }, johnny: { x: 210, y: 72 }, jackie: { x: 110, y: 255 }, judy: { x: 620, y: 65 }, panam: { x: 680, y: 180 }, rogue: { x: 590, y: 320 }, songbird: { x: 170, y: 410 }, reed: { x: 390, y: 405 }, yorinobu: { x: 780, y: 85 }, hanako: { x: 790, y: 210 }, myers: { x: 760, y: 365 } } }; const fallback = people.reduce<Record<string, { x: number; y: number }>>((positions, person, index) => ({ ...positions, [person.id]: { x: 90 + (index % 5) * 175, y: 70 + Math.floor(index / 5) * 190 } }), {}); return { ...fallback, ...preset[editionId] } }
+function mapPositions(editionId: EditionId, people: Character[]) { const preset: Record<EditionId, Record<string, { x: number; y: number }>> = { witcher3: { geralt: { x: 380, y: 160 }, ciri: { x: 210, y: 72 }, yennefer: { x: 560, y: 66 }, triss: { x: 630, y: 190 }, vesemir: { x: 190, y: 260 }, dandelion: { x: 520, y: 300 }, baron: { x: 77, y: 180 }, olivier: { x: 770, y: 80 }, olgierd: { x: 760, y: 195 }, regis: { x: 650, y: 330 }, dettlaff: { x: 815, y: 320 }, anna: { x: 785, y: 420 } }, cyberpunk2077: { v: { x: 380, y: 160 }, johnny: { x: 210, y: 72 }, jackie: { x: 110, y: 255 }, judy: { x: 620, y: 65 }, panam: { x: 680, y: 180 }, rogue: { x: 590, y: 320 }, songbird: { x: 170, y: 410 }, reed: { x: 390, y: 405 }, yorinobu: { x: 780, y: 85 }, hanako: { x: 790, y: 210 }, myers: { x: 760, y: 365 } }, gta5: { michael: { x: 220, y: 95 }, franklin: { x: 430, y: 175 }, trevor: { x: 660, y: 95 }, lester: { x: 120, y: 295 }, amanda: { x: 360, y: 325 }, jimmy: { x: 570, y: 315 }, tracey: { x: 780, y: 300 }, lamar: { x: 90, y: 440 }, dave: { x: 330, y: 445 }, steve: { x: 600, y: 440 }, devin: { x: 800, y: 440 }, martin: { x: 760, y: 175 }, patricia: { x: 790, y: 70 }, ron: { x: 100, y: 160 } } }; const fallback = people.reduce<Record<string, { x: number; y: number }>>((positions, person, index) => ({ ...positions, [person.id]: { x: 90 + (index % 5) * 175, y: 70 + Math.floor(index / 5) * 190 } }), {}); return { ...fallback, ...preset[editionId] } }
 
 export default App

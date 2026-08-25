@@ -63,6 +63,20 @@ const characterNameRules: CharacterNameRule[] = [
   { canonical: '罗莎琳德·迈尔斯', english: 'Rosalind Myers', aliases: ['罗莎琳德', 'Rosalind Myers'] },
   { canonical: '库尔特·汉森', english: 'Kurt Hansen', aliases: ['库尔特', 'Kurt Hansen'] },
   { canonical: '索尔·布莱特', english: 'Saul Bright', aliases: ['索尔', 'Saul Bright'] },
+  { canonical: '麦可·德圣塔', english: 'Michael De Santa', aliases: ['麦可', 'Michael De Santa', 'Michael Townley'] },
+  { canonical: '富兰克林·克林顿', english: 'Franklin Clinton', aliases: ['富兰克林', 'Franklin Clinton'] },
+  { canonical: '崔佛·菲利普', english: 'Trevor Philips', aliases: ['崔佛', 'Trevor Philips'] },
+  { canonical: '莱斯特·克瑞斯特', english: 'Lester Crest', aliases: ['莱斯特', 'Lester Crest'] },
+  { canonical: '拉玛·戴维斯', english: 'Lamar Davis', aliases: ['拉玛', 'Lamar Davis'] },
+  { canonical: '阿曼达·德圣塔', english: 'Amanda De Santa', aliases: ['阿曼达', 'Amanda De Santa'] },
+  { canonical: '吉米·德圣塔', english: 'Jimmy De Santa', aliases: ['吉米', 'Jimmy De Santa'] },
+  { canonical: '崔西·德圣塔', english: 'Tracey De Santa', aliases: ['崔西', 'Tracey De Santa'] },
+  { canonical: '戴夫·诺顿', english: 'Dave Norton', aliases: ['戴夫', 'Dave Norton'] },
+  { canonical: '史蒂夫·海因斯', english: 'Steve Haines', aliases: ['史蒂夫', 'Steve Haines'] },
+  { canonical: '德凡·韦斯顿', english: 'Devin Weston', aliases: ['德凡', 'Devin Weston'] },
+  { canonical: '马丁·马德拉索', english: 'Martin Madrazo', aliases: ['马丁', 'Martin Madrazo'] },
+  { canonical: '帕特里夏·马德拉索', english: 'Patricia Madrazo', aliases: ['帕特里夏', 'Patricia Madrazo'] },
+  { canonical: '罗恩·杰科夫斯基', english: 'Ron Jakowski', aliases: ['罗恩', 'Ron Jakowski'] },
 ]
 
 const officialTranslations: [string, string][] = [
