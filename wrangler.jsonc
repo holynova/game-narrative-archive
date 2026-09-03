@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "game-narrative-archive",
+  "compatibility_date": "2026-09-03",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "game-narrative-archive.xiaosang.cc",
+      "custom_domain": true
+    }
+  ]
+}
