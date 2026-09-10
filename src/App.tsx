@@ -16,7 +16,7 @@ type DlcTheme = { label: string; base: string; dlc: string }
 type ReaderSettings = { fontSize: number; lineHeight: number; paragraphSpacing: number; readingWidth: number }
 
 const readerSettingsKey = 'game-narrative-archive.reader-settings'
-const defaultReaderSettings: ReaderSettings = { fontSize: 17, lineHeight: 2.1, paragraphSpacing: 1.17, readingWidth: 680 }
+const defaultReaderSettings: ReaderSettings = { fontSize: 17, lineHeight: 1.65, paragraphSpacing: 1.05, readingWidth: 720 }
 
 function loadReaderSettings(): ReaderSettings {
   try {
@@ -154,9 +154,9 @@ function ReaderTools({ edition, settings, setSettings, onClose }: { edition: Gam
     <div className="reader-tools-heading"><div><span className="reader-tools-label">READER TOOLS</span><h2>把它读成你的书</h2></div><button className="reader-tools-close" onClick={onClose} aria-label="关闭阅读工具"><X size={17} /></button></div>
     <div className="reader-settings-grid">
       <label><span>字号</span><output>{settings.fontSize}px</output><input type="range" min="15" max="24" step="1" value={settings.fontSize} onChange={(event) => update('fontSize', Number(event.target.value))} /></label>
-      <label><span>行距</span><output>{settings.lineHeight.toFixed(1)} 倍</output><input type="range" min="1.6" max="2.5" step="0.1" value={settings.lineHeight} onChange={(event) => update('lineHeight', Number(event.target.value))} /></label>
+      <label><span>行距</span><output>{settings.lineHeight.toFixed(2)} 倍</output><input type="range" min="1.4" max="2.2" step="0.05" value={settings.lineHeight} onChange={(event) => update('lineHeight', Number(event.target.value))} /></label>
       <label><span>段落间距</span><output>{settings.paragraphSpacing.toFixed(2)} 倍</output><input type="range" min="0.6" max="1.8" step="0.05" value={settings.paragraphSpacing} onChange={(event) => update('paragraphSpacing', Number(event.target.value))} /></label>
-      <label><span>阅读宽度</span><output>{settings.readingWidth}px</output><input type="range" min="560" max="780" step="10" value={settings.readingWidth} onChange={(event) => update('readingWidth', Number(event.target.value))} /></label>
+      <label><span>阅读宽度</span><output>{settings.readingWidth}px</output><input type="range" min="560" max="800" step="10" value={settings.readingWidth} onChange={(event) => update('readingWidth', Number(event.target.value))} /></label>
     </div>
     <div className="reader-tools-divider" />
     <div className="reader-export"><div><span className="reader-tools-label">EXPORT BOOK</span><h3>下载成书</h3></div><p>EPUB 会使用阅读器自己的字体与主题，适合导入微信读书、Apple Books 或其他阅读器。</p><div className="export-row"><span>当前作品</span><button onClick={() => downloadText(false)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(false)}><Download size={14} /> EPUB</button></div><div className="export-row"><span>完整档案馆</span><button onClick={() => downloadText(true)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(true)}><Download size={14} /> EPUB</button></div>{status && <p className="reader-tool-status" role="status">{status}</p>}</div>

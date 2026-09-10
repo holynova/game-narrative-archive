@@ -8,27 +8,30 @@ The interface is a reading edition: a long-form story book with a clear table of
 
 Read first. The only essential interaction is moving between the reading view, the table of contents, and the appendix. Maps and comparisons are deliberately lightweight reference tools; they should answer a question without becoming a second application.
 
-## Palette
+## Palette (Kami Parchment & Deep Blue System)
 
-- Paper: `#F4EFE5`
-- Paper deep: `#E9E1D4`
-- Ink: `#25221E`
-- Muted ink: `#766F64`
-- Copper accent: `#A66F35`
-- Cool blue: `#617F91`
-- Signal red: `#A55443`
+- Canvas (Parchment): `#F5F4ED` (warm parchment reading background)
+- Surface (Ivory): `#FAF9F5` (elevated cards, tool modals, mobile TOC)
+- Text Ink (Near-black): `#141413` (high contrast, crisp deep ink)
+- Secondary Ink (Olive): `#504E49` (subtitles, secondary reading notes)
+- Tertiary Ink (Stone): `#6B6A64` (metadata, folios, counters)
+- Border: `#E8E6DC` (subtle hairline dividers)
+- Brand Navy: `#1B365D` (Kami signature seal blue for active states, quotes, kickers)
+- Brand Tint: `#E4ECF5` (subtle blue background for tags, badges, buttons)
+- Signal Red: `#A45E4F` (moral tension, critical divergence)
 
-Copper marks chapter rhythm and active navigation. Blue and red are reserved for appendix semantics such as relationship types or moral pressure. Every meaning is also written as text; color is never the only signal.
+## Typography (Kami Print-Grade Chinese Rules)
 
-## Typography
-
-- Display and chapter titles: `Newsreader`, with `苍耳今楷` / `仓耳今楷`, `Songti SC`, `STSong`, and Georgia fallbacks.
-- Chinese正文: `苍耳今楷` first, with common `TsangerJinKai` family names and Songti/Noto Serif fallbacks. The mobile reading surface uses a warm paper background, quieter headings, and a stable e-reader-like rhythm.
-- UI and navigation: `Instrument Sans`, with system CJK fallbacks.
-- Chinese copy follows the spacing and punctuation conventions from [少数派写作排版指南](https://sspai.com/post/37815): Chinese and Latin/数字之间留半角空格，不用段首空格，使用「」与……，长文不依赖粗体和彩色标记制造层级。
-- Reading paragraphs are left-aligned, without first-line indentation, and separated by a consistent paragraph rhythm. Metadata is small and tracked, but never competes with the body copy.
-- Narrative voice follows the original conversation: begin with a concrete scene or action, let the reader discover the motive and consequence in sequence, then pause for the ethical question. Avoid repeating “表面上 / 真正的问题是 / 这一章真正讨论的是” as a chapter template; interpretation should arrive after the story has earned it.
-- Chapter titles are allowed to be large and editorial; labels stay compact so the page still reads like a book.
+- **Single-Serif Philosophy**: Headings and body share the single serif font family: `TsangerJinKai02` (仓耳今楷), `Noto Serif SC`, `Source Han Serif SC`, `Songti SC`, `SimSun`, `serif`.
+- **Code & Numerals**: `JetBrains Mono`, `ui-monospace`, `Menlo`, `monospace`.
+- **Font-Synthesis None**: `font-synthesis: none;` strictly applied to avoid stroke distortion.
+- **Maximum Font Weight 500**: Bold elements (`strong`, `b`, headings) never exceed `font-weight: 500` (or 600 for small caps eyebrows).
+- **Chinese Body Tracking**: `letter-spacing: 0.35px` on all body paragraphs, creating natural optical breathing room for CJK square characters.
+- **Zero Heading Tracking**: Chinese titles have `letter-spacing: 0;` (preventing negative-tracking stroke collisions).
+- **Line Heights**: Body reading leading at `1.65` (replacing old loose 2.1), headings tight at `1.15 ~ 1.25`.
+- **Tabular Numerals**: `font-variant-numeric: lining-nums tabular-nums;` on all chapter numbers, index folios, dates, counters, and statistics.
+- **Eyebrow / Kicker Rules**: `10px`, `font-weight: 600`, `letter-spacing: 1.5px`, uppercase, `color: #1B365D`.
+- **Punctuation & Spacing**: Corner brackets `「` `」`, full ellipsis `……`, and half-width space between Chinese and Western alphanumeric characters.
 
 ## Layout
 
