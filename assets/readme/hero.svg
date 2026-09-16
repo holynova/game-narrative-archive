@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Story Atlas · 游戏剧情档案馆</title>
+  <desc id="desc">连续阅读游戏剧情、人物关系、选择后果与结局矩阵的手机优先档案。</desc>
+  <rect width="1200" height="360" rx="28" fill="#f3f0e7"/>
+  <path d="M0 286C180 258 310 318 500 286s330-62 700-18v92H0Z" fill="#e6e0d2"/>
+  <path d="M56 58H720M56 82H528" stroke="#b5aa94" stroke-width="2"/>
+  <text x="58" y="54" fill="#7f7462" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" letter-spacing="3">GAME / ARCHIVE · READING EDITION</text>
+  <text x="58" y="142" fill="#1f2a35" font-family="Georgia, 'Songti SC', serif" font-size="58" font-weight="700">游戏剧情档案馆</text>
+  <text x="60" y="183" fill="#596273" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="25">连续阅读剧情，追踪关系、选择与结局。</text>
+  <g transform="translate(58 226)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">
+    <rect width="236" height="48" rx="8" fill="#263746"/>
+    <text x="20" y="31" fill="#f3f0e7">WITCHER 3 ·  DLC</text>
+    <rect x="250" width="276" height="48" rx="8" fill="#8f493f"/>
+    <text x="270" y="31" fill="#fff9ef">CYBERPUNK 2077 ·  PHANTOM</text>
+  </g>
+  <g transform="translate(835 48)">
+    <rect width="306" height="250" rx="14" fill="#263746"/>
+    <path d="M28 48H278M28 82H198M28 116H246M28 150H180M28 184H260" stroke="#d2c5aa" stroke-width="3" opacity=".85"/>
+    <circle cx="258" cy="82" r="10" fill="#c56b4e"/>
+    <circle cx="220" cy="150" r="10" fill="#d3a257"/>
+    <path d="M258 82C230 96 244 136 220 150" fill="none" stroke="#c56b4e" stroke-width="4"/>
+    <path d="M220 150C190 168 200 190 168 204" fill="none" stroke="#d3a257" stroke-width="4"/>
+    <text x="28" y="224" fill="#f3f0e7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" letter-spacing="2">CHAPTER · CHOICE · ENDING</text>
+  </g>
+</svg>
