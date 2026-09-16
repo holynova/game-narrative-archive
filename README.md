@@ -2,17 +2,33 @@
 
 一个手机优先的游戏剧情阅读档案：目前收录《巫师 3：狂猎》（含两个 DLC）与《赛博朋克 2077》（含《往日之影》）。正文像小说一样连续阅读，人物关系、选择后果、结局矩阵和分析方法放在附录。
 
+## 阅读预览
+
+![Story Atlas 桌面端：双作品剧情阅读与档案导航](qa-desktop.png)
+
+<details>
+<summary>查看移动端阅读界面</summary>
+
+<img src="qa-mobile.png" width="320" alt="Story Atlas 移动端剧情阅读界面">
+
+</details>
+
+正文与附录包含剧情、关键选择和结局信息，适合通关后回顾或对照阅读。
+
 ## 本地运行
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-生产构建：
+开发服务器启动后，打开终端输出的本地地址。
+
+生产构建与本地预览：
 
 ```bash
 npm run build
+npm run preview
 ```
 
 ## 内容结构
