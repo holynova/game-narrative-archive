@@ -4,7 +4,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'night-city',
     index: '01',
-    region: '本体 · 夜之城',
+    region: '本体—夜之城',
     title: '夜之城不需要你活得有尊严',
     subtitle: '一个快要死的人，先要学会在一座把一切都标价的城市里活着。',
     summary: 'V 与杰克·威尔斯从街头、公司或荒漠出发，最终都被同一座城市收编：只要你能把自己变得有用，夜之城就暂时允许你存在。',
@@ -28,7 +28,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'relic-heist',
     index: '02',
-    region: '本体 · 绀碧大厦',
+    region: '本体—绀碧大厦',
     title: '偷走一枚芯片，也偷走了一个人的未来',
     subtitle: '德克斯特、伊芙琳和荒坂家族都把 V 当成工具，差别只在于谁更早承认。',
     summary: '一场看似改变阶级位置的盗窃，让 V 看见夜之城最残酷的秩序：每个人都可以背叛你，只要你不再值得被保留。',
@@ -53,7 +53,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'johnny-memory',
     index: '03',
-    region: '本体 · 灵魂印记',
+    region: '本体—灵魂印记',
     title: '强尼·银手不是英雄，是一段会说话的遗产',
     subtitle: '当一个人的记忆可以被复制，死者仍然拥有为自己辩护的权利吗？',
     summary: '强尼·银手从 V 的敌人逐渐变成同行者，两个人互相占据、互相纠正，也互相改写对生命的理解。',
@@ -78,7 +78,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'victims-and-revolutions',
     index: '04',
-    region: '本体 · 伊芙琳与朱迪',
+    region: '本体—伊芙琳与朱迪',
     title: '救出来，不等于救回来了',
     subtitle: '伊芙琳的悲剧和朱迪的反抗，都拒绝玩家相信“一次成功任务就能修复伤害”。',
     summary: '伊芙琳既是严重犯罪和虐待的受害者，也曾主动欺骗和利用别人；朱迪试图改变云顶，却逐渐发现局部革命很难逃离更大的权力结构。',
@@ -102,7 +102,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'nomads-and-freedom',
     index: '05',
-    region: '本体 · 流浪者家族',
+    region: '本体—流浪者家族',
     title: '安全和自由，哪个更像活着',
     subtitle: '帕南和索尔争论的不是一辆车，而是家族应该靠谁继续存在。',
     summary: '帕南·帕尔默与阿德卡多展示了另一种夜之城之外的生活，但他们同样必须在独立、资源和生存之间付出代价。',
@@ -125,7 +125,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'arasaka-and-endings',
     index: '06',
-    region: '本体 · 神舆之前',
+    region: '本体—神舆之前',
     title: '结局不是治疗方案，而是价值排序',
     subtitle: '荒坂、阿德卡多、罗格与强尼分别提供了活下去的方式，也分别要求 V 交出一部分自己。',
     summary: '本体的终局把“活下来”拆成几种互相冲突的价值：秩序、家人、传奇、自我牺牲，以及把决定权重新握回自己手里。',
@@ -151,7 +151,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'phantom-liberty',
     index: '07',
-    region: '扩展 · 往日之影',
+    region: '扩展—往日之影',
     title: '往日之影：每个人都在骗你',
     subtitle: '狗镇像一场更短、更密的间谍惊悚：忠诚、国家和自由都已经破碎。',
     summary: '百灵鸟、所罗门·李德、罗莎琳德·迈尔斯与库尔特·汉森把 V 拉进狗镇。每个人都说自己在拯救别人，每个人也都在利用别人。',
@@ -175,7 +175,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'songbird-reed',
     index: '08',
-    region: '扩展 · 火力全开',
+    region: '扩展—火力全开',
     title: '百灵鸟和李德：救人还是执行任务',
     subtitle: '同一场行动可以被看作逃亡、叛国、救援，也可以被看作一场更精确的绑架。',
     summary: '在关键分支中，V 要决定是帮助百灵鸟逃离，还是把她交给李德。两条路线都暴露出谁有权处置一个已经失控的身体。',
@@ -199,7 +199,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'tower-ending',
     index: '09',
-    region: '扩展 · 高塔',
+    region: '扩展—高塔',
     title: '高塔：被治好以后，你还剩下什么',
     subtitle: 'V 真的活了下来，但活下来并没有把过去的人和关系一起带回来。',
     summary: '往日之影解锁的高塔结局把本体最后的幻想反过来：V 获得了治疗，却失去战斗能力、旧的生活和许多旧关系。',
@@ -222,7 +222,7 @@ export const cyberpunkChapters: Chapter[] = [
   {
     id: 'cyberpunk-afterword',
     index: '10',
-    region: '尾声 · 重新定义自由',
+    region: '尾声—重新定义自由',
     title: '夜之城还是夜之城',
     subtitle: '你可以击败一个公司，却不能靠一次任务解决整个系统。',
     summary: '本体和 DLC 最后汇合到同一个问题：自由不是没有代价，而是在代价无法消失时，仍然保留决定由谁来承担的权利。',

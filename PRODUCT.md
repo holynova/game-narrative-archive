@@ -12,11 +12,11 @@ delegated: React + TypeScript + Vite, with local structured content and no backe
 
 ## Users
 
-The primary user is the requester, reading on a phone or laptop to revisit and understand full game narratives. The first two editions are The Witcher 3 and Cyberpunk 2077. A secondary audience is future readers who want a spoiler-aware, analytical guide rather than a completionist walkthrough.
+The primary user is the requester, reading on a phone or laptop to revisit and understand full game narratives. The first three editions are The Witcher 3, Cyberpunk 2077, and GTA 5. A secondary audience is future readers who want a spoiler-aware, analytical guide rather than a completionist walkthrough.
 
 ## Product Purpose
 
-Preserve and publish high-quality, full-spoiler analyses of The Witcher 3: Wild Hunt and Cyberpunk 2077, including Hearts of Stone / Blood and Wine and Phantom Liberty. The main experience is a continuous, novel-like reading journey: the reader should be able to start at the beginning and follow the story, motives, choices, consequences, and themes without repeatedly leaving the prose.
+Preserve and publish high-quality, full-spoiler analyses of The Witcher 3: Wild Hunt, Cyberpunk 2077, and Grand Theft Auto V, including Hearts of Stone / Blood and Wine and Phantom Liberty. GTA 5 has no single-player story DLC, so its appendix contrasts the base game with GTA Online instead of a DLC. The main experience is a continuous, novel-like reading journey: the reader should be able to start at the beginning and follow the story, motives, choices, consequences, and themes without repeatedly leaving the prose.
 
 ## Positioning
 
@@ -29,7 +29,7 @@ The site is a personal reading archive and reviewable static web project. It sho
 ## Capabilities and Constraints
 
 - Full spoilers are allowed, with a clear spoiler warning before entry.
-- Scope includes the complete authored reading arc, important side stories, and the relevant DLC for each edition: Hearts of Stone and Blood and Wine for The Witcher 3; Phantom Liberty for Cyberpunk 2077.
+- Scope includes the complete authored reading arc, important side stories, and the relevant DLC for each edition: Hearts of Stone and Blood and Wine for The Witcher 3; Phantom Liberty for Cyberpunk 2077; GTA 5 has no single-player story DLC, so its appendix covers GTA Online as an online extension of the same city.
 - The reference conversation's style is preserved: chapter-led explanation, factual versus interpretive labels, deliberate pauses at moral dilemmas, and thematic synthesis.
 - The reading view presents the complete story as one continuous sequence. Chapter headings, rules, and a small folio counter provide rhythm without turning every section into a card.
 - The table of contents is a locating tool, not a replacement for the prose. It groups main story, side stories, and DLC chapters.

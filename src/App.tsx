@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { ArrowUpRight, BookOpen, ChevronRight, Download, Menu, Network, RotateCcw, ScrollText, SlidersHorizontal, X } from 'lucide-react'
+import { ArrowUpRight, BookOpen, ChevronRight, Download, Layers, Menu, Network, RotateCcw, ScrollText, SlidersHorizontal, X } from 'lucide-react'
 import { analysisSteps, chapters, characters, decisions, dlcThemes, endings, methodQuestions, relationships } from './data'
 import { cyberpunkChapters, cyberpunkCharacters, cyberpunkDecisions, cyberpunkDlcThemes, cyberpunkEndings, cyberpunkRelationships } from './cyberpunkData'
 import { gta5Chapters, gta5Characters, gta5Decisions, gta5DlcThemes, gta5Endings, gta5Relationships } from './gta5Data'
@@ -62,9 +62,14 @@ type GameEdition = {
   decisions: Decision[]
   endings: Ending[]
   dlcThemes: DlcTheme[]
+  dlcIntro: string
+  dlcSectionTitle: string
+  dlcColumnLabel: string
   dlcCards: { label: string; title: string; body: string }[]
   methodIntro: string
 }
+
+const centerCharacterId: Record<EditionId, string> = { witcher3: 'geralt', cyberpunk2077: 'v', gta5: 'franklin' }
 
 const appendixTabs: { id: AppendixTab; label: string }[] = [
   { id: 'people', label: '人物关系' },
@@ -76,20 +81,20 @@ const appendixTabs: { id: AppendixTab; label: string }[] = [
 const editions: Record<EditionId, GameEdition> = {
   witcher3: {
     id: 'witcher3', label: '《巫师 3：狂猎》', shortLabel: 'THE WITCHER 3', kicker: 'THE WITCHER 3 / WILD HUNT', titleLead: '一场关于', titleEmphasis: '如何放手',
-    opening: '从白果园的一口井，到希里最终要走向的世界。这里不急着解释所有支线，也不要求你先看懂所有关系，只从第一页开始，连续读下去。', scopeLabel: '本体 + 2 个 DLC', readingTime: '约 40 分钟',
-    preface: '《巫师 3》的真正主线，不是杰洛特消灭了多少怪物，而是他如何在每一次没有干净答案的选择里，继续和别人一起生活。', railCurrent: '本体 + 石之心 + 血与酒', chapters, characters, relationships, decisions, endings, dlcThemes,
-    dlcCards: [{ label: 'D1', title: '石之心', body: '把责任写成一纸契约：救欧吉尔德，不等于替他抹去过去。' }, { label: 'D2', title: '血与酒', body: '把宽恕放进童话王国：理解创伤，不等于取消责任。' }], methodIntro: '把这套读法带到《赛博朋克 2077》或下一款游戏。',
+    opening: '从白果园的一口井，到希里最终要走向的世界。这里不急着解释所有支线，也不要求你先看懂所有关系，只从第一页开始，连续读下去。', scopeLabel: '本体 + 2 个 DLC', readingTime: '约 30 分钟',
+    preface: '《巫师 3》的真正主线，不是杰洛特消灭了多少怪物，而是他如何在每一次没有干净答案的选择里，继续和别人一起生活。', railCurrent: '本体 + 石之心 + 血与酒', chapters, characters, relationships, decisions, endings, dlcThemes, dlcIntro: '两个 DLC 没有换掉主题，只是把问题问得更狠。', dlcSectionTitle: 'DLC 对照', dlcColumnLabel: 'DLC',
+    dlcCards: [{ label: 'D1', title: '石之心', body: '把责任写成一纸契约：救欧吉尔德，不等于替他抹去过去。' }, { label: 'D2', title: '血与酒', body: '把宽恕放进童话王国：理解创伤，不等于取消责任。' }], methodIntro: '把这套读法带到下一款游戏：先找问题，再追踪动机、选择与代价。',
   },
   cyberpunk2077: {
     id: 'cyberpunk2077', label: '《赛博朋克 2077》', shortLabel: 'CYBERPUNK 2077', kicker: 'CYBERPUNK 2077 / PHANTOM LIBERTY', titleLead: '一场关于', titleEmphasis: '自由意志',
-    opening: '从夜之城的第一场大买卖，到 V 被迫决定谁有权继续使用自己的身体。这里把本体和《往日之影》放在一条连续的阅读线上。', scopeLabel: '本体 + 往日之影', readingTime: '约 35 分钟',
-    preface: '《赛博朋克 2077》的真正主线，不是 V 如何打败荒坂，而是当身体、记忆和人格都可能被改写时，V 还能否保留决定由谁承担代价的权利。', railCurrent: '本体 + 往日之影', chapters: cyberpunkChapters, characters: cyberpunkCharacters, relationships: cyberpunkRelationships, decisions: cyberpunkDecisions, endings: cyberpunkEndings, dlcThemes: cyberpunkDlcThemes,
+    opening: '从夜之城的第一场大买卖，到 V 被迫决定谁有权继续使用自己的身体。这里把本体和《往日之影》放在一条连续的阅读线上。', scopeLabel: '本体 + 往日之影', readingTime: '约 20 分钟',
+    preface: '《赛博朋克 2077》的真正主线，不是 V 如何打败荒坂，而是当身体、记忆和人格都可能被改写时，V 还能否保留决定由谁承担代价的权利。', railCurrent: '本体 + 往日之影', chapters: cyberpunkChapters, characters: cyberpunkCharacters, relationships: cyberpunkRelationships, decisions: cyberpunkDecisions, endings: cyberpunkEndings, dlcThemes: cyberpunkDlcThemes, dlcIntro: '往日之影把本体的求生问题推进成一场关于忠诚的间谍惊悚。', dlcSectionTitle: 'DLC 对照', dlcColumnLabel: 'DLC',
     dlcCards: [{ label: 'DLC', title: '往日之影', body: '把求生问题推进成间谍惊悚：每个救命的人，都可能在利用你。' }, { label: 'END', title: '高塔', body: 'V 真的被治好，却不能再回到曾经定义自己的生活。' }], methodIntro: '把这套读法继续带到下一款游戏：先找问题，再追踪动机、选择与代价。',
   },
   gta5: {
     id: 'gta5', label: '《GTA 5》', shortLabel: 'GTA 5', kicker: 'GRAND THEFT AUTO V / LOS SANTOS', titleLead: '一场关于', titleEmphasis: '如何逃离',
-    opening: '从北扬克顿的一场假死，到洛圣都最后一个电话。这里把麦可、富兰克林和崔佛放回同一条连续阅读线上，也把一座永远不会停止运转的城市读成一个角色。', scopeLabel: '本体 · 无单人剧情 DLC', readingTime: '约 35 分钟',
-    preface: '《GTA 5》的真正主线，不是三个人如何赚到最后一笔钱，而是当每个人都把背叛解释成生存时，富兰克林能不能拒绝继承他们的全部债务。', railCurrent: '本体 + GTA Online 关联', chapters: gta5Chapters, characters: gta5Characters, relationships: gta5Relationships, decisions: gta5Decisions, endings: gta5Endings, dlcThemes: gta5DlcThemes,
+    opening: '从北扬克顿的一场假死，到洛圣都最后一个电话。这里把麦可、富兰克林和崔佛放回同一条连续阅读线上，也把一座永远不会停止运转的城市读成一个角色。', scopeLabel: '本体，无单人剧情 DLC', readingTime: '约 25 分钟',
+    preface: '《GTA 5》的真正主线，不是三个人如何赚到最后一笔钱，而是当每个人都把背叛解释成生存时，富兰克林能不能拒绝继承他们的全部债务。', railCurrent: '本体 + GTA Online 关联', chapters: gta5Chapters, characters: gta5Characters, relationships: gta5Relationships, decisions: gta5Decisions, endings: gta5Endings, dlcThemes: gta5DlcThemes, dlcIntro: '《GTA 5》没有单人剧情 DLC，这里对照的是本体与 GTA Online 的主题变化。', dlcSectionTitle: '本体之外', dlcColumnLabel: '线上延展',
     dlcCards: [{ label: 'NOTE', title: '单人剧情 DLC', body: '《GTA 5》没有正式发布单人剧情 DLC。本档案把《GTA Online》作为同一城市的线上延展说明，不把它伪装成三位主角的线性续章。' }, { label: 'ONLINE', title: 'GTA Online', body: '从三位主角的犯罪故事，扩展成玩家自己经营组织、资产和声望的持续世界。' }], methodIntro: '把这套读法带到下一款游戏：先问人物如何被系统塑造，再追踪他们把代价交给了谁。',
   },
 }
@@ -108,7 +113,7 @@ function App() {
 
   useEffect(() => {
     const label = view === 'read' ? '阅读' : view === 'contents' ? '目录' : '附录'
-    document.title = `${edition.label} · ${label} · 游戏剧情档案馆`
+    document.title = `${edition.label} — ${label} — 游戏剧情档案馆`
   }, [edition, view])
 
   const changeEdition = (next: EditionId) => { setEditionId(next); setView('read'); setTocOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }
@@ -130,6 +135,7 @@ function App() {
       <button className={`reader-tools-button ${readerToolsOpen ? 'is-active' : ''}`} onClick={() => setReaderToolsOpen((open) => !open)} aria-expanded={readerToolsOpen} aria-controls="reader-tools"><SlidersHorizontal size={16} /><span>阅读工具</span></button>
     </header>
     {readerToolsOpen && <ReaderTools edition={edition} settings={readerSettings} setSettings={setReaderSettings} onClose={() => setReaderToolsOpen(false)} />}
+    {tocOpen && <button className="toc-backdrop" aria-label="关闭目录" onClick={() => setTocOpen(false)} />}
     <div className="book-layout"><TableOfContents edition={edition} editionId={editionId} activeView={view} open={tocOpen} onEdition={changeEdition} onRead={openRead} onAppendix={openAppendix} /><main className="book-main">{view === 'read' && <ReadingView edition={edition} onAppendix={openAppendix} formatText={formatNarrativeText} />}{view === 'contents' && <ContentsView edition={edition} onRead={openRead} />}{view === 'appendix' && <AppendixView edition={edition} activeTab={appendixTab} onTab={setAppendixTab} />}</main><ReadingRail edition={edition} view={view} /></div>
     <footer className="book-footer"><span>GAME / ARCHIVE</span><span>一份连续阅读的剧情档案</span><span>2026</span></footer>
   </div>
@@ -140,23 +146,31 @@ function ReaderTools({ edition, settings, setSettings, onClose }: { edition: Gam
   const update = (key: keyof ReaderSettings, value: number) => setSettings({ ...settings, [key]: value })
   const reset = () => setSettings(defaultReaderSettings)
   const downloadText = (all: boolean) => {
-    const scope = all ? Object.values(editions) : [edition]
-    saveBlob(new Blob([`\ufeff${buildTextBook(scope)}`], { type: 'text/plain;charset=utf-8' }), all ? 'game-narrative-archive.txt' : `${editionFilename(edition)}-story.txt`)
-    setStatus(all ? '完整档案 TXT 已生成' : '当前作品 TXT 已生成')
+    try {
+      const scope = all ? Object.values(editions) : [edition]
+      saveBlob(new Blob([`\ufeff${buildTextBook(scope)}`], { type: 'text/plain;charset=utf-8' }), all ? 'game-narrative-archive.txt' : `${editionFilename(edition)}-story.txt`)
+      setStatus(all ? '完整档案 TXT 已生成' : '当前作品 TXT 已生成')
+    } catch {
+      setStatus('生成失败，请重试')
+    }
   }
   const downloadEpub = (all: boolean) => {
-    const scope = all ? Object.values(editions) : [edition]
-    saveBlob(buildEpub(scope), all ? 'game-narrative-archive.epub' : `${editionFilename(edition)}-story.epub`)
-    setStatus(all ? '完整档案 EPUB 已生成' : '当前作品 EPUB 已生成')
+    try {
+      const scope = all ? Object.values(editions) : [edition]
+      saveBlob(buildEpub(scope), all ? 'game-narrative-archive.epub' : `${editionFilename(edition)}-story.epub`)
+      setStatus(all ? '完整档案 EPUB 已生成' : '当前作品 EPUB 已生成')
+    } catch {
+      setStatus('生成失败，请重试')
+    }
   }
 
   return <aside className="reader-tools" id="reader-tools" aria-label="阅读工具">
     <div className="reader-tools-heading"><div><span className="reader-tools-label">READER TOOLS</span><h2>把它读成你的书</h2></div><button className="reader-tools-close" onClick={onClose} aria-label="关闭阅读工具"><X size={17} /></button></div>
     <div className="reader-settings-grid">
-      <label><span>字号</span><output>{settings.fontSize}px</output><input type="range" min="15" max="24" step="1" value={settings.fontSize} onChange={(event) => update('fontSize', Number(event.target.value))} /></label>
+      <label><span>字号</span><output>{settings.fontSize}</output><input type="range" min="15" max="24" step="1" value={settings.fontSize} onChange={(event) => update('fontSize', Number(event.target.value))} /></label>
       <label><span>行距</span><output>{settings.lineHeight.toFixed(2)} 倍</output><input type="range" min="1.4" max="2.2" step="0.05" value={settings.lineHeight} onChange={(event) => update('lineHeight', Number(event.target.value))} /></label>
       <label><span>段落间距</span><output>{settings.paragraphSpacing.toFixed(2)} 倍</output><input type="range" min="0.6" max="1.8" step="0.05" value={settings.paragraphSpacing} onChange={(event) => update('paragraphSpacing', Number(event.target.value))} /></label>
-      <label><span>阅读宽度</span><output>{settings.readingWidth}px</output><input type="range" min="560" max="800" step="10" value={settings.readingWidth} onChange={(event) => update('readingWidth', Number(event.target.value))} /></label>
+      <label><span>阅读宽度</span><output>{settings.readingWidth}</output><input type="range" min="560" max="800" step="10" value={settings.readingWidth} onChange={(event) => update('readingWidth', Number(event.target.value))} /></label>
     </div>
     <div className="reader-tools-divider" />
     <div className="reader-export"><div><span className="reader-tools-label">EXPORT BOOK</span><h3>下载成书</h3></div><p>EPUB 会使用阅读器自己的字体与主题，适合导入微信读书、Apple Books 或其他阅读器。</p><div className="export-row"><span>当前作品</span><button onClick={() => downloadText(false)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(false)}><Download size={14} /> EPUB</button></div><div className="export-row"><span>完整档案馆</span><button onClick={() => downloadText(true)}><Download size={14} /> TXT</button><button onClick={() => downloadEpub(true)}><Download size={14} /> EPUB</button></div>{status && <p className="reader-tool-status" role="status">{status}</p>}</div>
@@ -166,16 +180,26 @@ function ReaderTools({ edition, settings, setSettings, onClose }: { edition: Gam
 
 function TableOfContents({ edition, editionId, activeView, open, onEdition, onRead, onAppendix }: { edition: GameEdition; editionId: EditionId; activeView: ViewId; open: boolean; onEdition: (id: EditionId) => void; onRead: (chapterId?: string) => void; onAppendix: (tab?: AppendixTab) => void }) {
   const groups = chapterGroups(edition.chapters)
-  return <aside className={`toc ${open ? 'is-open' : ''}`} aria-label="剧情目录"><div className="toc-editions" aria-label="选择作品">{(Object.keys(editions) as EditionId[]).map((id) => <button key={id} className={editionId === id ? 'is-active' : ''} onClick={() => onEdition(id)}>{editions[id].label}</button>)}</div><div className="toc-heading"><span>目录</span><span className="toc-count">{edition.chapters.length} 章</span></div><button className={`toc-home ${activeView === 'read' ? 'is-active' : ''}`} onClick={() => onRead()}><BookOpen size={15} /><span>从头开始阅读</span></button>{groups.map((group) => <div className="toc-group" key={group.title}><span className="toc-group-title">{group.title}</span>{group.entries.map((chapter) => <button className="toc-entry" key={chapter.id} onClick={() => onRead(chapter.id)}><span>{chapter.index}</span><strong>{formatChineseText(chapter.title)}</strong></button>)}</div>)}<div className="toc-appendix"><span className="toc-group-title">附录</span><button onClick={() => onAppendix('people')}><Network size={14} /><span>人物关系</span></button><button onClick={() => onAppendix('choices')}><ChevronRight size={14} /><span>选择与结局</span></button><button onClick={() => onAppendix('method')}><ScrollText size={14} /><span>分析方法</span></button></div></aside>
+  return <aside className={`toc ${open ? 'is-open' : ''}`} aria-label="剧情目录"><div className="toc-editions" aria-label="选择作品">{(Object.keys(editions) as EditionId[]).map((id) => <button key={id} className={editionId === id ? 'is-active' : ''} onClick={() => onEdition(id)}>{editions[id].label}</button>)}</div><div className="toc-heading"><span>目录</span><span className="toc-count">{edition.chapters.length} 章</span></div><button className={`toc-home ${activeView === 'read' ? 'is-active' : ''}`} onClick={() => onRead()}><BookOpen size={15} /><span>从头开始阅读</span></button>{groups.map((group) => <div className="toc-group" key={group.title}><span className="toc-group-title">{group.title}</span>{group.entries.map((chapter) => <button className="toc-entry" key={chapter.id} onClick={() => onRead(chapter.id)}><span>{chapter.index}</span><strong>{formatChineseText(chapter.title)}</strong></button>)}</div>)}<div className="toc-appendix"><span className="toc-group-title">附录</span><button onClick={() => onAppendix('people')}><Network size={14} /><span>人物关系</span></button><button onClick={() => onAppendix('choices')}><ChevronRight size={14} /><span>选择与结局</span></button><button onClick={() => onAppendix('dlc')}><Layers size={14} /><span>DLC 对照</span></button><button onClick={() => onAppendix('method')}><ScrollText size={14} /><span>分析方法</span></button></div></aside>
 }
 
 function ReadingRail({ edition, view }: { edition: GameEdition; view: ViewId }) { return <aside className="reading-rail" aria-label="阅读信息"><div className="rail-rule" /><span className="rail-label">READING EDITION</span><strong>{view === 'read' ? '连续阅读' : view === 'contents' ? '章节目录' : '辅助附录'}</strong><p>{view === 'read' ? '把它当成一本书。从一页读到下一页，先让故事自己展开。' : '这里的工具不替正文讲故事，只在你需要回看时提供索引。'}</p><div className="rail-rule rail-rule-bottom" /><span className="rail-label">CURRENT TEXT</span><span className="rail-current">{edition.railCurrent}</span></aside> }
 
 function ReadingView({ edition, onAppendix, formatText }: { edition: GameEdition; onAppendix: (tab?: AppendixTab) => void; formatText: (value: string) => string }) {
-  return <div className="reading-view"><section className="book-opening"><span className="opening-kicker">{edition.kicker}</span><h1>{edition.titleLead}<br /><em>{edition.titleEmphasis}</em>的旅程</h1><p>{formatText(edition.opening)}</p><div className="opening-meta"><span>{edition.scopeLabel}</span><span>全剧透</span><span>{edition.readingTime}</span></div></section><article className="continuous-story"><div className="story-preface"><span className="chapter-number">序</span><p>{formatText(edition.preface)}</p></div>{edition.chapters.map((chapter, index) => <ChapterBlock chapter={chapter} number={index + 1} total={edition.chapters.length} formatText={formatText} key={chapter.id} />)}</article><section className="reading-end"><span className="opening-kicker">THE END IS ANOTHER BEGINNING</span><h2>读完正文，再去看那些图。</h2><p>人物关系、选择矩阵和分析方法都放在附录里。它们不是另一套入口，而是读完故事之后，帮你回头看清结构的工具。</p><div className="appendix-links"><button onClick={() => onAppendix('people')}>人物关系 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('choices')}>选择与结局 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('method')}>分析方法 <ArrowUpRight size={14} /></button></div></section></div>
+  return <div className="reading-view"><section className="book-opening"><span className="opening-kicker">{edition.kicker}</span><h1>{edition.titleLead}<br /><em>{edition.titleEmphasis}</em>的旅程</h1><p>{formatText(edition.opening)}</p><div className="opening-meta"><span>{edition.scopeLabel}</span><span>全剧透</span><span>{edition.readingTime}</span></div></section><article className="continuous-story"><div className="story-preface"><span className="chapter-number">序</span><p>{formatText(edition.preface)}</p></div>{edition.chapters.map((chapter, index) => <ChapterBlock chapter={chapter} number={index + 1} total={edition.chapters.length} formatText={formatText} key={chapter.id} />)}</article><section className="reading-end"><span className="opening-kicker">THE END IS ANOTHER BEGINNING</span><h2>读完正文，再去看那些图。</h2><p>人物关系、选择矩阵和分析方法都放在附录里。它们不是另一套入口，而是读完故事之后，帮你回头看清结构的工具。</p><div className="appendix-links"><button onClick={() => onAppendix('people')}>人物关系 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('choices')}>选择与结局 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('dlc')}>DLC 对照 <ArrowUpRight size={14} /></button><button onClick={() => onAppendix('method')}>分析方法 <ArrowUpRight size={14} /></button></div></section></div>
 }
 
-function ChapterBlock({ chapter, number, total, formatText }: { chapter: Chapter; number: number; total: number; formatText: (value: string) => string }) { return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{formatText(chapter.region)}</span><h2>{formatText(chapter.title)}</h2><p>{formatText(chapter.subtitle)}</p></div></header><div className="story-prose">{chapter.body.map((paragraph, index) => <p className={storyParagraphClass(paragraph)} key={`${chapter.id}-${index}`}>{formatText(paragraph)}</p>)}</div><aside className="hard-question"><span>这一章留下的问题</span><strong>{formatText(chapter.question)}</strong></aside><div className="chapter-tail"><span>{chapter.tags.map(formatText).join('  ·  ')}</span><span>{String(number).padStart(2, '0')} / {String(total).padStart(2, '0')}</span></div></section> }
+function ChapterBlock({ chapter, number, total, formatText }: { chapter: Chapter; number: number; total: number; formatText: (value: string) => string }) {
+  const fact = splitMarker(chapter.fact, '事实')
+  const reading = splitMarker(chapter.reading, '解读')
+  return <section className="chapter-block" id={chapter.id}><header className="chapter-heading"><span className="chapter-number">{chapter.index}</span><div><span className="chapter-region">{formatText(chapter.region)}</span><h2>{formatText(chapter.title)}</h2><p>{formatText(chapter.subtitle)}</p></div></header><p className="chapter-summary"><span>本章梗概</span>{formatText(chapter.summary)}</p><div className="story-prose">{chapter.body.map((paragraph, index) => <p className={storyParagraphClass(paragraph)} key={`${chapter.id}-${index}`}>{formatText(paragraph)}</p>)}</div><div className="fact-reading"><div className="fact-row"><span>{fact.label}</span><p>{formatText(fact.rest)}</p></div><div className="fact-row"><span>{reading.label}</span><p>{formatText(reading.rest)}</p></div></div><aside className="hard-question"><span>这一章留下的问题</span><strong>{formatText(chapter.question)}</strong></aside><div className="chapter-tail"><span>{chapter.tags.map(formatText).join('、')}</span><span>{String(number).padStart(2, '0')} / {String(total).padStart(2, '0')}</span></div></section>
+}
+
+function splitMarker(value: string, fallback: string) {
+  const match = value.match(/^[【\[](确定|推断|很可能)[】\]]\s*/)
+  if (!match) return { label: fallback, rest: value }
+  return { label: match[1], rest: value.slice(match[0].length) }
+}
 
 function storyParagraphClass(paragraph: string) { if (paragraph.startsWith('>')) return 'story-quote'; if (paragraph.startsWith('【确定】') || paragraph.startsWith('[确定]')) return 'story-fact'; if (paragraph.startsWith('【很可能】') || paragraph.startsWith('[很可能]')) return 'story-reading'; if (/^(选择|如果|与此同时|最终|现在再看|结局|路线|所以我的判断|这就是|真正的)/.test(paragraph)) return 'story-turn'; return '' }
 
@@ -183,15 +207,15 @@ function ContentsView({ edition, onRead }: { edition: GameEdition; onRead: (chap
 
 function AppendixView({ edition, activeTab, onTab }: { edition: GameEdition; activeTab: AppendixTab; onTab: (tab: AppendixTab) => void }) { return <div className="appendix-view"><section className="appendix-intro"><span className="opening-kicker">APPENDIX / AFTER READING</span><h1>附录</h1><p>正文之外的索引工具。需要时打开，不需要时让它安静地待在书后。</p></section><nav className="appendix-tabs" aria-label="附录导航">{appendixTabs.map((tab) => <button key={tab.id} className={activeTab === tab.id ? 'is-active' : ''} onClick={() => onTab(tab.id)}>{tab.label}</button>)}</nav>{activeTab === 'people' && <PeopleAppendix edition={edition} />}{activeTab === 'choices' && <ChoicesAppendix edition={edition} />}{activeTab === 'dlc' && <DlcAppendix edition={edition} />}{activeTab === 'method' && <MethodAppendix edition={edition} />}</div> }
 
-function PeopleAppendix({ edition }: { edition: GameEdition }) { const position = mapPositions(edition.id, edition.characters); return <section className="appendix-section people-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">01 / RELATIONSHIP MAP</span><h2>人物关系</h2></div><p>这不是恋爱表，而是一张保护关系的地图。</p></div><div className="mini-map-wrap"><svg className="mini-map" viewBox="0 0 890 480" role="img" aria-label={`${edition.label}主要人物关系图`}>{edition.relationships.map((link) => <line key={`${link.from}-${link.to}`} className={`mini-link ${link.tone}`} x1={position[link.from].x} y1={position[link.from].y} x2={position[link.to].x} y2={position[link.to].y} />)}{edition.characters.map((character) => <g key={character.id} className="mini-node" transform={`translate(${position[character.id].x} ${position[character.id].y})`}><circle r={character.id === (edition.id === 'witcher3' ? 'geralt' : 'v') ? 27 : 21} /><text y="42" textAnchor="middle">{formatChineseText(character.name)}</text></g>)}</svg></div><div className="people-index">{edition.characters.map((character) => <div key={character.id}><strong>{formatChineseText(character.name)}</strong><span>{formatChineseText(character.role)}</span><p>{formatChineseText(character.note)}</p></div>)}</div></section> }
+function PeopleAppendix({ edition }: { edition: GameEdition }) { const position = mapPositions(edition.id, edition.characters); const centerId = centerCharacterId[edition.id]; return <section className="appendix-section people-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">01 / RELATIONSHIP MAP</span><h2>人物关系</h2></div><p>这不是恋爱表，而是一张保护关系的地图。</p></div><div className="mini-map-wrap"><svg className="mini-map" viewBox="0 0 890 480" role="img" aria-label={`${edition.label}主要人物关系图`}>{edition.relationships.map((link) => <line key={`${link.from}-${link.to}`} className={`mini-link ${link.tone}`} x1={position[link.from].x} y1={position[link.from].y} x2={position[link.to].x} y2={position[link.to].y} />)}{edition.characters.map((character) => <g key={character.id} className={`mini-node${character.id === centerId ? ' is-center' : ''}`} transform={`translate(${position[character.id].x} ${position[character.id].y})`}><circle r={character.id === centerId ? 27 : 21} /><text y="42" textAnchor="middle">{formatChineseText(character.name)}</text></g>)}</svg></div><div className="people-index">{edition.characters.map((character) => <div key={character.id}><strong>{formatChineseText(character.name)}</strong><span>{formatChineseText(character.role)}</span><p>{formatChineseText(character.note)}</p></div>)}</div></section> }
 
-function ChoicesAppendix({ edition }: { edition: GameEdition }) { return <section className="appendix-section choices-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">02 / ECHOES</span><h2>选择与结局</h2></div><p>结局不是最后一题，而是早先态度的回声。</p></div><div className="choice-list">{edition.decisions.map((decision, index) => <div className="choice-row" key={decision.id}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{formatChineseText(decision.title)}</strong><p>{formatChineseText(decision.prompt)}</p></div><small>{formatChineseText(decision.branches.join(' / '))}</small></div>)}</div><div className="ending-list">{edition.endings.map((ending, index) => <div key={ending.title}><span>{String(index + 1).padStart(2, '0')}</span><strong>{formatChineseText(ending.title)}</strong><p>{formatChineseText(ending.reading)}</p></div>)}</div></section> }
+function ChoicesAppendix({ edition }: { edition: GameEdition }) { return <section className="appendix-section choices-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">02 / ECHOES</span><h2>选择与结局</h2></div><p>结局不是最后一题，而是早先态度的回声。</p></div><div className="choice-list">{edition.decisions.map((decision, index) => <div className="choice-row" key={decision.id}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{formatChineseText(decision.title)}</strong><p>{formatChineseText(decision.prompt)}</p><p className="choice-note">解读：{formatChineseText(decision.note)}</p></div><small>{formatChineseText(decision.branches.join(' / '))}</small></div>)}</div><div className="ending-list">{edition.endings.map((ending, index) => <div key={ending.title}><span>{String(index + 1).padStart(2, '0')}</span><strong>{formatChineseText(ending.title)}</strong><p>{formatChineseText(ending.reading)}</p><p className="ending-condition">达成条件：{formatChineseText(ending.condition)}</p></div>)}</div></section> }
 
-function DlcAppendix({ edition }: { edition: GameEdition }) { return <section className="appendix-section dlc-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">03 / EXPANSIONS</span><h2>本体之外</h2></div><p>{edition.id === 'witcher3' ? '两个 DLC 没有换掉主题，只是把问题问得更狠。' : '往日之影把本体的求生问题推进成一场关于忠诚的间谍惊悚。'}</p></div><div className="dlc-summary">{edition.dlcCards.map((card) => <div key={card.label}><span>{card.label}</span><h3>{card.title}</h3><p>{card.body}</p></div>)}</div><div className="theme-list">{edition.dlcThemes.map((theme) => <div key={theme.label}><strong>{theme.label}</strong><p>{theme.base}</p><p>{theme.dlc}</p></div>)}</div></section> }
+function DlcAppendix({ edition }: { edition: GameEdition }) { return <section className="appendix-section dlc-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">03 / EXPANSIONS</span><h2>本体之外</h2></div><p>{edition.dlcIntro}</p></div><div className="dlc-summary">{edition.dlcCards.map((card) => <div key={card.label}><span>{card.label}</span><h3>{card.title}</h3><p>{card.body}</p></div>)}</div><div className="theme-list"><div className="theme-list-header"><span /><span>本体</span><span>{edition.dlcColumnLabel}</span></div>{edition.dlcThemes.map((theme) => <div key={theme.label}><strong>{theme.label}</strong><p><span className="theme-col-label">本体</span>{theme.base}</p><p><span className="theme-col-label">{edition.dlcColumnLabel}</span>{theme.dlc}</p></div>)}</div></section> }
 
 function MethodAppendix({ edition }: { edition: GameEdition }) { return <section className="appendix-section method-appendix"><div className="appendix-section-heading"><div><span className="opening-kicker">04 / THE LENS</span><h2>分析方法</h2></div><p>{edition.methodIntro}</p></div><blockquote className="method-quote">「不要压缩。遇到两难就停下来彻底拆开。」</blockquote><div className="method-list">{analysisSteps.map((step) => <div key={step.number}><span>{step.number}</span><div><strong>{step.title}</strong><p>{step.body}</p></div></div>)}</div><div className="method-questions"><span className="opening-kicker">先问这六个问题</span>{methodQuestions.map((question, index) => <p key={question}><span>{String(index + 1).padStart(2, '0')}</span>{question}</p>)}</div></section> }
 
-function chapterGroups(chaptersForEdition: Chapter[]) { return [{ title: '本体 · 旅程', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'main') }, { title: '本体 · 支线', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'side') }, { title: '扩展 · DLC', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'dlc') }].filter((group) => group.entries.length > 0) }
+function chapterGroups(chaptersForEdition: Chapter[]) { return [{ title: '本体—旅程', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'main') }, { title: '本体—支线', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'side') }, { title: '扩展—DLC', entries: chaptersForEdition.filter((chapter) => chapter.kind === 'dlc') }].filter((group) => group.entries.length > 0) }
 
 function mapPositions(editionId: EditionId, people: Character[]) { const preset: Record<EditionId, Record<string, { x: number; y: number }>> = { witcher3: { geralt: { x: 380, y: 160 }, ciri: { x: 210, y: 72 }, yennefer: { x: 560, y: 66 }, triss: { x: 630, y: 190 }, vesemir: { x: 190, y: 260 }, dandelion: { x: 520, y: 300 }, baron: { x: 77, y: 180 }, olivier: { x: 770, y: 80 }, olgierd: { x: 760, y: 195 }, regis: { x: 650, y: 330 }, dettlaff: { x: 815, y: 320 }, anna: { x: 785, y: 420 } }, cyberpunk2077: { v: { x: 380, y: 160 }, johnny: { x: 210, y: 72 }, jackie: { x: 110, y: 255 }, judy: { x: 620, y: 65 }, panam: { x: 680, y: 180 }, rogue: { x: 590, y: 320 }, songbird: { x: 170, y: 410 }, reed: { x: 390, y: 405 }, yorinobu: { x: 780, y: 85 }, hanako: { x: 790, y: 210 }, myers: { x: 760, y: 365 } }, gta5: { michael: { x: 220, y: 95 }, franklin: { x: 430, y: 175 }, trevor: { x: 660, y: 95 }, lester: { x: 120, y: 295 }, amanda: { x: 360, y: 325 }, jimmy: { x: 570, y: 315 }, tracey: { x: 780, y: 300 }, lamar: { x: 90, y: 440 }, dave: { x: 330, y: 445 }, steve: { x: 600, y: 440 }, devin: { x: 800, y: 440 }, martin: { x: 760, y: 175 }, patricia: { x: 790, y: 70 }, ron: { x: 100, y: 160 } } }; const fallback = people.reduce<Record<string, { x: number; y: number }>>((positions, person, index) => ({ ...positions, [person.id]: { x: 90 + (index % 5) * 175, y: 70 + Math.floor(index / 5) * 190 } }), {}); return { ...fallback, ...preset[editionId] } }
 

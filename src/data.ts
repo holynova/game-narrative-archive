@@ -34,7 +34,7 @@ export const chapters: Chapter[] = [
   {
     id: 'white-orchard',
     index: '01',
-    region: '序章 · 白果园',
+    region: '序章—白果园',
     title: '战争已经先到了',
     subtitle: '一场寻找叶奈法的旅程，从一口井里的鬼魂开始。',
     summary: '杰洛特与维瑟米尔在白果园寻找叶奈法。表面的目标是找到人，真正的开场却先让玩家看见：战争如何把普通人的生活切成一块块无人负责的废墟。',
@@ -60,7 +60,7 @@ export const chapters: Chapter[] = [
   {
     id: 'bloody-baron',
     index: '02',
-    region: '第一幕 · 威伦',
+    region: '第一幕—威伦',
     title: '血腥男爵：一个家庭并不是受害者之家',
     subtitle: '拯救一个人，可能意味着继续和另一个人的罪共处。',
     summary: '杰洛特用寻找希里的线索换取男爵家人的下落，最后却卷进一段关于酗酒、暴力、流产、逃亡与无法修复的家庭关系。',
@@ -85,7 +85,7 @@ export const chapters: Chapter[] = [
   {
     id: 'ladies-wood',
     index: '03',
-    region: '第一幕 · 威伦',
+    region: '第一幕—威伦',
     title: '林中夫人：童话只是权力的化妆',
     subtitle: '孩子、村庄和三位“守护者”，谁在讲述真相？',
     summary: '从孤儿村到泥沼深处，杰洛特不断被要求在不完整的信息中做判断。每条线索都像民间故事，但每个奇迹背后都是资源分配和恐惧管理。',
@@ -109,7 +109,7 @@ export const chapters: Chapter[] = [
   {
     id: 'novigrad',
     index: '04',
-    region: '第二幕 · 诺维格瑞',
+    region: '第二幕—诺维格瑞',
     title: '一座城市如何把人变成标签',
     subtitle: '火刑、黑帮、法师与“正常人”的边界。',
     summary: '诺维格瑞的主线围绕寻找丹德里恩展开，同时把玩家放进一座正在清除异端的城市。特莉丝、法师、矮人、妓院和黑帮构成了不同版本的生存策略。',
@@ -133,7 +133,7 @@ export const chapters: Chapter[] = [
   {
     id: 'now-or-never',
     index: '05',
-    region: '第二幕 · 诺维格瑞',
+    region: '第二幕—诺维格瑞',
     title: '生死攸关：逃亡不是浪漫的冒险',
     subtitle: '特莉丝不是等待被拯救的人，她在组织撤离。',
     summary: '特莉丝与诺维格瑞法师的逃亡线，把“爱情选择”放进了真实的政治压力里。杰洛特的决定不仅关于两个人的关系，也会决定谁有机会离开这座城。',
@@ -156,7 +156,7 @@ export const chapters: Chapter[] = [
   {
     id: 'skellige',
     index: '06',
-    region: '第三幕 · 史凯利格',
+    region: '第三幕—史凯利格',
     title: '两个继承人：英雄不等于好国王',
     subtitle: '哈尔玛适合冲进暴风雪，凯瑞丝更适合坐在风暴之后。',
     summary: '史凯利格王位争夺把“传统英雄主义”和“治理能力”放在同一张桌上。哈尔玛用勇气证明自己，凯瑞丝用调查和克制证明自己。',
@@ -181,7 +181,7 @@ export const chapters: Chapter[] = [
   {
     id: 'uma',
     index: '07',
-    region: '第四幕 · 收束',
+    region: '第四幕—收束',
     title: '乌马：关键线索常常长得最不起眼',
     subtitle: '当所有宏大计划都失效，只剩下一个被诅咒的小丑。',
     summary: '寻找希里的线索最终回到乌马身上。解除诅咒的过程重新聚拢了猎魔人、女术士、国王与旧日同伴，也把叙事从私人寻找推向集体备战。',
@@ -207,7 +207,7 @@ export const chapters: Chapter[] = [
   {
     id: 'kaer-morhen',
     index: '08',
-    region: '第四幕 · 收束',
+    region: '第四幕—收束',
     title: '凯尔莫罕之战：失去维瑟米尔之后',
     subtitle: '故事第一次不再问“能不能救她”，而是问“怎样让她活成自己”。',
     summary: '凯尔莫罕保卫战中，狂猎带走了维瑟米尔。希里的崩溃与爆发把整个故事推过分水岭：从寻找一个女儿，转向见证她成为一个能做决定的人。',
@@ -234,7 +234,7 @@ export const chapters: Chapter[] = [
   {
     id: 'ciri-choices',
     index: '09',
-    region: '终局 · 希里',
+    region: '终局—希里',
     title: '希里的五个小选择',
     subtitle: '结局不是最后一扇门，而是几十小时态度的回声。',
     summary: '陪希里喝酒还是带她见皇帝、让她独自面对女术士、陪她去阿瓦拉克实验室、是否去看斯凯利的墓——这些细节共同决定她如何理解自己。',
@@ -265,7 +265,7 @@ export const chapters: Chapter[] = [
   {
     id: 'hearts-of-stone',
     index: 'D1',
-    region: 'DLC · 石之心',
+    region: 'DLC—石之心',
     title: '欧吉尔德：救他，是奖励还是惩罚？',
     subtitle: '契约可以拿走痛苦，也可以拿走一个人承担责任的能力。',
     summary: '欧吉尔德为了翻身与欧迪姆签约，失去了感情与痛觉，又用一连串残酷的愿望把自己变成故事里的“坏人”。杰洛特要决定的不是他干不干净，而是他是否还能重新成为一个会痛的人。',
@@ -298,7 +298,7 @@ export const chapters: Chapter[] = [
   {
     id: 'blood-and-wine',
     index: 'D2',
-    region: 'DLC · 血与酒',
+    region: 'DLC—血与酒',
     title: '童话王国的连环谋杀案',
     subtitle: '“好结局”并不等于所有罪都被擦掉。',
     summary: '陶森特像一幅童话画，但它的秩序建立在被排除的人、未被处理的童年伤口和王室的沉默上。席安娜、狄拉夫、安娜与雷吉斯共同把“受害者是否仍要负责”推到最尖锐。',
