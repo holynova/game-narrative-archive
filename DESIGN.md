@@ -18,7 +18,7 @@ Read first. The only essential interaction is moving between the reading view, t
 - Border: `#E8E6DC` (subtle hairline dividers)
 - Brand Navy: `#1B365D` (Kami signature seal blue for active states, quotes, kickers)
 - Brand Tint: `#E4ECF5` (subtle blue background for tags, badges, buttons)
-- Signal Red: `#A45E4F` (moral tension, critical divergence)
+- Signal Red: `#A02C22` (moral tension, critical divergence)
 
 ## Typography (Kami Print-Grade Chinese Rules)
 
@@ -30,7 +30,7 @@ Read first. The only essential interaction is moving between the reading view, t
 - **Zero Heading Tracking**: Chinese titles have `letter-spacing: 0;` (preventing negative-tracking stroke collisions).
 - **Line Heights**: Body reading leading at `1.65` (replacing old loose 2.1), headings tight at `1.15 ~ 1.25`.
 - **Tabular Numerals**: `font-variant-numeric: lining-nums tabular-nums;` on all chapter numbers, index folios, dates, counters, and statistics.
-- **Eyebrow / Kicker Rules**: `10px`, `font-weight: 600`, `letter-spacing: 1.5px`, uppercase, `color: #1B365D`.
+- **Eyebrow / Kicker Rules**: `12px` (`--fs-s`), `font-weight: 600`, `letter-spacing: 1.5px`, uppercase, `color: #1B365D`.
 - **Punctuation & Spacing**: Corner brackets `「` `」`, full ellipsis `……`, and half-width space between Chinese and Western alphanumeric characters.
 
 ## Layout
@@ -61,7 +61,7 @@ Read first. The only essential interaction is moving between the reading view, t
 
 ## Content grammar
 
-The content model separates `fact`, `reading`, `question`, `tags`, `kind`, and `region`. This is the central reusable seam for future games. Both `巫师 3：狂猎` and `赛博朋克 2077：往日之影` use the same reading and appendix surfaces. New games should be added as data first, then connected to shared reading and appendix surfaces. The reader-facing voice distinguishes `【确定】` from `【很可能】` / `【推断】` so evidence and interpretation never blur together. Official Chinese name normalization happens at the display boundary, keeping source data editable while ensuring the reader never sees accidental English-only names.
+The content model separates `fact`, `reading`, `question`, `tags`, `kind`, and `region`. This is the central reusable seam for future games. `巫师 3：狂猎`、`赛博朋克 2077：往日之影` and `GTA 5` use the same reading and appendix surfaces. New games should be added as data first, then connected to shared reading and appendix surfaces. The reader-facing voice distinguishes `【确定】` from `【很可能】` / `【推断】` so evidence and interpretation never blur together. Official Chinese name normalization happens at the display boundary, keeping source data editable while ensuring the reader never sees accidental English-only names.
 
 ## Complexity deliberately removed
 

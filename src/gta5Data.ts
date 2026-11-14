@@ -4,7 +4,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'north-yankton',
     index: '01',
-    region: '序章 · 北扬克顿',
+    region: '序章—北扬克顿',
     title: '一场抢劫，三个人的不同版本',
     subtitle: '麦可假装自己死了，崔佛却一直活在那场抢劫里。',
     summary: '九年前的北扬克顿抢劫案不是一个等待揭开的谜底，而是三个人分别拿来保护自己的故事：麦可把背叛说成自救，崔佛把失去说成被出卖，戴夫把真相处理成一份可以结案的档案。',
@@ -26,7 +26,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'franklin-and-michael',
     index: '02',
-    region: '本体 · 洛圣都西部',
+    region: '本体—洛圣都西部',
     title: '富兰克林想往上走，麦可想退回去',
     subtitle: '一个年轻人把中年人的生活看成出口，中年人却把年轻人看成过去的自己。',
     summary: '富兰克林·克林顿和拉玛·戴维斯靠替车行收回汽车谋生，直到富兰克林闯进麦可的私人生活。两个人的相遇把“上升”与“退休”放进了同一辆车里。',
@@ -48,7 +48,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'family-crisis',
     index: '03',
-    region: '本体 · 德圣塔之家',
+    region: '本体—德圣塔之家',
     title: '麦可有一个家，却没有回家的能力',
     subtitle: '他的家人知道他很糟，却不知道他究竟为什么永远在逃。',
     summary: '阿曼达、吉米和崔西让麦可看见自己想守住的一切，也让他看见自己造成的全部伤害。家庭危机不是主线之外的笑料，而是麦可无法退休的证据。',
@@ -70,7 +70,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'trevor-returns',
     index: '04',
-    region: '本体 · 沙漠与洛圣都',
+    region: '本体—沙漠与洛圣都',
     title: '崔佛回来时，麦可的退休生活结束了',
     subtitle: '朋友没有从过去回来，过去本身就是朋友。',
     summary: '崔佛从电视新闻里认出麦可，带着愤怒和依恋重新进入洛圣都。两人的重逢让九年前的谎言变成一场现在仍在进行的犯罪。',
@@ -93,7 +93,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'trevor-empire',
     index: '05',
-    region: '本体 · 布莱恩郡',
+    region: '本体—布莱恩郡',
     title: '崔佛想拥有一块不被夺走的土地',
     subtitle: '他把所有关系都变成占有，因为他不相信有人会自愿留下。',
     summary: '崔佛在布莱恩郡与失落摩托帮、墨西哥帮派和自己的生意周旋。荒野不是他的自由之地，而是他用恐惧圈出来的一块安全区。',
@@ -115,7 +115,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'heist-machine',
     index: '06',
-    region: '本体 · 抢劫网络',
+    region: '本体—抢劫网络',
     title: '抢劫不是一次冒险，是一台把人变成零件的机器',
     subtitle: '莱斯特负责把人和路线排进计划，真正支付代价的却总是某个具体的人。',
     summary: '莱斯特·克瑞斯特为三人组设计一连串抢劫，从珠宝店、装甲车到联邦储蓄银行。每次计划都越来越精密，也越来越清楚地暴露：钱不是唯一的收益，控制感才是。',
@@ -137,7 +137,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'state-machine',
     index: '07',
-    region: '本体 · FIB 与梅利威瑟',
+    region: '本体—FIB 与梅利威瑟',
     title: '国家也会犯罪，只是它有更好的表格',
     subtitle: 'FIB、IAA、梅利威瑟和富豪们争夺同一座城市，区别只是他们拥有不同的合法性。',
     summary: '戴夫、史蒂夫·海因斯和德凡·韦斯顿把主角们推入一系列政治和商业任务。游戏不再问“谁是坏人”，而是问谁有能力把自己的暴力写进制度。',
@@ -159,7 +159,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'paleto-score',
     index: '08',
-    region: '本体 · 帕勒托湾',
+    region: '本体—帕勒托湾',
     title: '三个人可以并肩作战，却无法共同生活',
     subtitle: '帕勒托湾的枪火让他们暂时成为一支队伍，也让每个人都更清楚这支队伍会在哪里解体。',
     summary: '帕勒托湾抢劫和后续的联邦储蓄银行计划，把麦可、富兰克林与崔佛的合作推到最强。共同的敌人让他们像家人，真实的旧账却让这种亲密随时可能爆炸。',
@@ -181,7 +181,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'truth-of-north-yankton',
     index: '09',
-    region: '本体 · 过去的尸体',
+    region: '本体—过去的尸体',
     title: '布拉德死了，麦可仍然没有说完真相',
     subtitle: '崔佛想知道谁背叛了谁，麦可却只能继续用更多解释保护第一个谎言。',
     summary: '北扬克顿真相终于被揭开：布拉德早已死亡，麦可为了新生活让崔佛相信自己死了。真相没有带来释放，只让三个人的关系重新获得了准确的伤口。',
@@ -204,7 +204,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'final-choice',
     index: '10',
-    region: '终局 · 富兰克林的电话',
+    region: '终局—富兰克林的电话',
     title: '富兰克林必须替别人决定谁该死',
     subtitle: '三个结局不是善恶按钮，而是三种不同的继承方式。',
     summary: '德凡与史蒂夫逼迫富兰克林在麦可和崔佛之间选择一个，富兰克林也可以选择第三条路。所谓“死亡愿望”不是无代价的英雄结局，而是拒绝继续成为别人手里的执行者。',
@@ -227,7 +227,7 @@ export const gta5Chapters: Chapter[] = [
   {
     id: 'after-the-score',
     index: '11',
-    region: '尾声 · 洛圣都仍然运转',
+    region: '尾声—洛圣都仍然运转',
     title: '抢完最后一票以后，生活没有变得清白',
     subtitle: '洛圣都不会因为三个人活下来，就承认他们已经完成了改变。',
     summary: '第三结局保住了三位主角的关系，却没有取消他们的过去。麦可仍然需要面对家庭，崔佛仍然需要面对依恋，富兰克林则开始拥有一个不再完全由前辈安排的未来。',

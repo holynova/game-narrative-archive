@@ -33,28 +33,18 @@
   --brand: #1B365D;             /* Kami signature navy blue / 印章群青 */
   --brand-tint: #e4ecf5;        /* Soft brand tint / 霁蓝水色 */
   --brand-light: #5a7b9e;       /* Light brand accent */
-  --alert-red: #a45e4f;         /* Moral stake / warning tone */
-  --choice-gold: #8c6820;       /* Branching choice accent */
-
-  /* Backwards compatibility aliases */
-  --paper: var(--canvas);
-  --paper-bright: var(--surface);
-  --muted: var(--ink-secondary);
-  --light-muted: var(--ink-tertiary);
-  --rule: var(--border);
-  --accent: var(--brand);
-  --accent-light: var(--brand-light);
-  --blue: var(--brand-light);
-  --red: var(--alert-red);
+  --alert-red: #a02c22;         /* Moral stake / warning tone */
 
   /* Single-Serif Typography Stack */
   --font-serif: 'TsangerJinKai02', '仓耳今楷02', 'TsangerJinKai01', '仓耳今楷', 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 
-  --serif: var(--font-serif);
-  --reading: var(--font-serif);
-  --cjk: var(--font-sans);
+  /* Font-size tokens: 4 sizes site-wide (reader body size stays user-controlled) */
+  --fs-s: 12px;
+  --fs-m: 16px;
+  --fs-l: 24px;
+  --fs-xl: clamp(30px, 3.6vw, 48px);
 
   /* Kami Invariant 1: Font synthesis strictly disabled */
   font-synthesis: none;
@@ -94,7 +84,7 @@ strong, b {
 .toc-group-title,
 .contents-group-heading span:first-child {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-s)
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -140,14 +130,14 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .identity-mark {
   color: var(--brand);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-s)
   font-weight: 600;
   letter-spacing: 1.5px;
 }
 .identity-name {
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   letter-spacing: 0.35px;
 }
 .mobile-menu-button { display: none; color: var(--ink); }
@@ -156,7 +146,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 8px 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   position: relative;
   letter-spacing: 0.35px;
   transition: color 0.15s ease;
@@ -178,13 +168,13 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   min-width: 250px;
   color: var(--ink-tertiary);
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: var(--fs-s)
 }
 .book-edition button {
   padding: 6px 0;
   color: var(--ink-tertiary);
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: var(--fs-s)
   letter-spacing: 0.35px;
   transition: color 0.15s ease;
 }
@@ -204,7 +194,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   background: var(--brand-tint);
   border-radius: 4px;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--fs-s)
   font-weight: 500;
   white-space: nowrap;
   transition: background 0.15s ease;
@@ -239,7 +229,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 6px 0 0;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: var(--fs-l)
   font-weight: 500;
   line-height: 1.25;
 }
@@ -263,12 +253,12 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   gap: 6px;
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--fs-s)
 }
 .reader-settings-grid output {
   color: var(--ink-secondary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-s)
 }
 .reader-settings-grid input {
   grid-column: 1 / -1;
@@ -282,14 +272,14 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 6px 0 0;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: var(--fs-l)
   font-weight: 500;
 }
 .reader-export > p {
   margin: 10px 0 16px;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   line-height: 1.6;
   letter-spacing: 0.35px;
 }
@@ -302,7 +292,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   border-top: 1px solid var(--border);
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
 }
 .export-row button {
   display: inline-flex;
@@ -313,7 +303,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   background: var(--brand-tint);
   border-radius: 3px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-s)
   font-weight: 500;
   transition: background 0.15s ease;
 }
@@ -322,7 +312,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 14px 0 0;
   color: var(--brand);
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: var(--fs-s)
 }
 .reader-reset {
   display: inline-flex;
@@ -332,7 +322,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 6px 0;
   color: var(--ink-tertiary);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--fs-s)
 }
 .reader-reset:hover { color: var(--ink); }
 
@@ -362,13 +352,13 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin-bottom: 18px;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: var(--fs-l)
   font-weight: 500;
 }
 .toc-count {
   color: var(--ink-tertiary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-s)
 }
 .toc-editions {
   display: grid;
@@ -381,7 +371,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 4px 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   text-align: left;
   letter-spacing: 0.35px;
   transition: color 0.15s ease;
@@ -395,7 +385,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 8px 0 10px;
   color: var(--brand);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   text-align: left;
   letter-spacing: 0.35px;
 }
@@ -415,13 +405,13 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .toc-entry span {
   color: var(--ink-tertiary);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-s)
   padding-top: 1px;
 }
 .toc-entry strong {
   color: inherit;
   font-family: var(--font-serif);
-  font-size: 12.5px;
+  font-size: var(--fs-s)
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0.25px;
@@ -443,7 +433,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 6px 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 12px;
+  font-size: var(--fs-s)
   text-align: left;
   letter-spacing: 0.35px;
 }
@@ -464,14 +454,14 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin-top: 8px;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
 .reading-rail p {
   margin: 10px 0 0;
   font-family: var(--font-serif);
-  font-size: 13.5px;
+  font-size: var(--fs-s)
   line-height: 1.6;
   letter-spacing: 0.35px;
   color: var(--ink-secondary);
@@ -480,7 +470,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   display: block;
   margin-top: 8px;
   color: var(--brand);
-  font-size: 13px;
+  font-size: var(--fs-s)
   letter-spacing: 0.35px;
 }
 
@@ -495,7 +485,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 24px 0 22px;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: clamp(44px, 6.5vw, 76px);
+  font-size: var(--fs-xl)
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: 0;
@@ -510,7 +500,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 19px;
+  font-size: var(--fs-m)
   line-height: 1.68;
   letter-spacing: 0.35px;
 }
@@ -520,7 +510,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   gap: 16px;
   margin-top: 28px;
   color: var(--ink-tertiary);
-  font-size: 10.5px;
+  font-size: var(--fs-s)
   letter-spacing: 0.08em;
 }
 .opening-meta span + span {
@@ -538,7 +528,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .chapter-number {
   color: var(--brand);
   font-family: var(--font-serif);
-  font-size: 17px;
+  font-size: var(--fs-m)
   font-weight: 500;
 }
 .story-preface p {
@@ -546,7 +536,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 25px;
+  font-size: var(--fs-l)
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.35px;
@@ -567,7 +557,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 10px 0 10px;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3.8vw, 42px);
+  font-size: var(--fs-xl)
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: 0;
@@ -578,7 +568,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 16.5px;
+  font-size: var(--fs-m)
   line-height: 1.65;
   letter-spacing: 0.35px;
 }
@@ -616,7 +606,6 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 0.65em 0 0.65em 1.25em;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 1.02em;
   line-height: 1.65;
   letter-spacing: 0.35px;
   border-left: 2px solid var(--brand);
@@ -635,7 +624,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 }
 .hard-question span {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-s)
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -647,7 +636,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin-top: 8px;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 19px;
+  font-size: var(--fs-m)
   font-weight: 500;
   line-height: 1.55;
   letter-spacing: 0.35px;
@@ -658,8 +647,53 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   gap: 20px;
   margin: 32px 0 0 68px;
   color: var(--ink-tertiary);
-  font-size: 10.5px;
+  font-size: var(--fs-s)
   letter-spacing: 0.08em;
+}
+
+.chapter-summary {
+  margin: 28px 0 0 68px;
+  color: var(--ink-secondary);
+  font-family: var(--font-serif);
+  font-size: var(--fs-m);
+  line-height: 1.65;
+  letter-spacing: 0.35px;
+}
+.chapter-summary > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: var(--fs-s);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+.fact-reading {
+  margin: 36px 0 0 68px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.fact-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+}
+.fact-row > span {
+  padding-top: 3px;
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: var(--fs-s);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.fact-row > p {
+  margin: 0;
+  color: var(--ink-secondary);
+  font-family: var(--font-serif);
+  font-size: var(--fs-m);
+  line-height: 1.65;
+  letter-spacing: 0.35px;
 }
 
 .reading-end {
@@ -670,7 +704,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .reading-end h2 {
   margin: 16px 0 12px;
   font-family: var(--font-serif);
-  font-size: 36px;
+  font-size: var(--fs-xl)
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: 0;
@@ -681,7 +715,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 17px;
+  font-size: var(--fs-m)
   line-height: 1.65;
   letter-spacing: 0.35px;
 }
@@ -700,7 +734,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   background: var(--brand-tint);
   border-radius: 4px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--fs-s)
   font-weight: 500;
   transition: background 0.15s ease;
 }
@@ -714,14 +748,14 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 }
 .contents-intro h1, .appendix-intro h1 {
   margin-bottom: 16px;
-  font-size: clamp(48px, 6.8vw, 72px);
+  font-size: var(--fs-xl)
 }
 .contents-intro p, .appendix-intro p {
   max-width: 46ch;
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   line-height: 1.65;
   letter-spacing: 0.35px;
 }
@@ -733,7 +767,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-dark);
   color: var(--brand);
-  font-size: 10px;
+  font-size: var(--fs-s)
   letter-spacing: 1.5px;
 }
 .contents-row {
@@ -751,18 +785,18 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .contents-row > span {
   color: var(--ink-tertiary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-s)
 }
 .contents-row strong {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.25px;
 }
 .contents-row small {
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13.5px;
+  font-size: var(--fs-s)
   line-height: 1.45;
   letter-spacing: 0.25px;
 }
@@ -774,7 +808,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .contents-appendix h2 {
   margin: 14px 0 30px;
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: var(--fs-xl)
   font-weight: 500;
   color: var(--ink);
 }
@@ -791,7 +825,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   display: block;
   margin-top: 24px;
   font-family: var(--font-serif);
-  font-size: 17px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
@@ -799,7 +833,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 8px 0 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13.5px;
+  font-size: var(--fs-s)
   line-height: 1.55;
   letter-spacing: 0.35px;
 }
@@ -815,7 +849,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding: 4px 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   letter-spacing: 0.35px;
   transition: color 0.15s ease;
 }
@@ -833,7 +867,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .appendix-section-heading h2 {
   margin: 10px 0 0;
   font-family: var(--font-serif);
-  font-size: 40px;
+  font-size: var(--fs-xl)
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0;
@@ -844,7 +878,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 15.5px;
+  font-size: var(--fs-m)
   line-height: 1.5;
   letter-spacing: 0.35px;
 }
@@ -860,11 +894,11 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .mini-link { stroke-width: 1.2; stroke-opacity: 0.72; }
 .mini-link.family { stroke: var(--brand); }
 .mini-link.ally { stroke: var(--brand-light); stroke-dasharray: 4 4; }
-.mini-link.rival { stroke: var(--alert-red); }
+.mini-link.rival { stroke: var(--alert-red); stroke-dasharray: 2 3; }
 .mini-link.romance { stroke: #9c6c6a; stroke-width: 2; }
 .mini-node circle { fill: var(--surface); stroke: var(--ink); stroke-width: 1; }
-.mini-node:first-of-type circle { stroke: var(--brand); stroke-width: 2; }
-.mini-node text { fill: var(--ink); font-family: var(--font-serif); font-size: 11px; }
+.mini-node.is-center circle { stroke: var(--brand); stroke-width: 2; }
+.mini-node text { fill: var(--ink); font-family: var(--font-serif); font-size: var(--fs-s) }
 
 .people-index {
   display: grid;
@@ -880,21 +914,21 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 }
 .people-index strong {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
 .people-index span {
   color: var(--ink-tertiary);
   font-family: var(--font-serif);
-  font-size: 11.5px;
+  font-size: var(--fs-s)
 }
 .people-index p {
   grid-column: 2;
   margin: 3px 0 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13.5px;
+  font-size: var(--fs-s)
   line-height: 1.5;
   letter-spacing: 0.35px;
 }
@@ -914,7 +948,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .choice-row strong {
   display: block;
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
@@ -922,11 +956,12 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 6px 0 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--fs-m)
   line-height: 1.55;
   letter-spacing: 0.35px;
 }
 .choice-row small { display: block; color: var(--brand); }
+.choice-row .choice-note { color: var(--ink); }
 
 .ending-list {
   display: grid;
@@ -943,7 +978,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 }
 .ending-list strong {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
@@ -952,9 +987,15 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 3px 0 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--fs-m)
   line-height: 1.55;
   letter-spacing: 0.35px;
+}
+
+.ending-list .ending-condition {
+  color: var(--brand);
+  font-family: var(--font-sans);
+  font-size: var(--fs-s);
 }
 
 .dlc-summary {
@@ -971,7 +1012,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .dlc-summary h3 {
   margin: 24px 0 8px;
   font-family: var(--font-serif);
-  font-size: 26px;
+  font-size: var(--fs-l)
   font-weight: 500;
   color: var(--ink);
 }
@@ -979,10 +1020,23 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: var(--fs-m)
   line-height: 1.55;
   letter-spacing: 0.35px;
 }
+
+.theme-list-header {
+  display: grid;
+  grid-template-columns: 130px 1fr 1fr;
+  gap: 20px;
+  padding: 0 0 10px;
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: var(--fs-s);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.theme-col-label { display: none; }
 
 .theme-list > div {
   display: grid;
@@ -994,7 +1048,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .theme-list strong {
   color: var(--brand);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
@@ -1002,7 +1056,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 14.5px;
+  font-size: var(--fs-m)
   line-height: 1.55;
   letter-spacing: 0.35px;
 }
@@ -1014,7 +1068,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   padding-left: 18px;
   color: var(--alert-red);
   font-family: var(--font-serif);
-  font-size: 26px;
+  font-size: var(--fs-l)
   line-height: 1.35;
   letter-spacing: 0.35px;
   border-left: 2px solid var(--alert-red);
@@ -1028,7 +1082,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 }
 .method-list strong {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--fs-m)
   font-weight: 500;
   letter-spacing: 0.35px;
 }
@@ -1037,7 +1091,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 6px 0 0;
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 14.5px;
+  font-size: var(--fs-m)
   line-height: 1.6;
   letter-spacing: 0.35px;
 }
@@ -1053,7 +1107,7 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   margin: 14px 0;
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--fs-m)
   line-height: 1.5;
   letter-spacing: 0.35px;
 }
@@ -1066,15 +1120,17 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   border-top: 1px solid var(--border);
   color: var(--ink-tertiary);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-s)
   letter-spacing: 0.08em;
 }
 .book-footer span:nth-child(2) {
   color: var(--ink-secondary);
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--fs-s)
   letter-spacing: 0.35px;
 }
+
+.toc-backdrop { display: none; }
 
 @media (max-width: 1050px) {
   .book-layout { grid-template-columns: 175px minmax(0, 720px); gap: 36px; }
@@ -1088,10 +1144,10 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   .book-header { height: 60px; padding: 0 18px; }
   .mobile-menu-button { display: inline-grid; place-items: center; }
   .book-identity { min-width: 0; gap: 8px; }
-  .identity-mark { font-size: 9px; }
-  .identity-name { font-size: 12px; }
+  .identity-mark { font-size: var(--fs-s) }
+  .identity-name { font-size: var(--fs-s) }
   .book-nav { gap: 16px; }
-  .book-nav button { font-size: 12px; }
+  .book-nav button { font-size: var(--fs-s) }
   .book-edition { display: none; }
   .reader-tools-button { margin-left: 8px; padding: 6px 10px; }
   .reader-tools-button span { display: none; }
@@ -1114,6 +1170,15 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
     transition: transform 0.22s ease;
   }
   .toc.is-open { transform: translateX(0); }
+  .toc-backdrop {
+    position: fixed;
+    z-index: 24;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(20, 20, 19, 0.32);
+  }
 
   .reader-tools {
     top: 66px;
@@ -1123,27 +1188,27 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
     max-height: calc(100vh - 80px);
     padding: 20px;
   }
-  .reader-tools-heading h2 { font-size: 22px; }
+  .reader-tools-heading h2 { font-size: var(--fs-l) }
   .reader-settings-grid { grid-template-columns: 1fr; gap: 16px; }
 
   .book-opening, .contents-intro, .appendix-intro { padding-top: 54px; }
-  .book-opening h1, .contents-intro h1, .appendix-intro h1 { max-width: none; font-size: 36px; line-height: 1.25; margin: 16px 0 18px; word-break: break-word; }
-  .book-opening > p { max-width: none; font-size: 16.5px; line-height: 1.65; word-break: break-word; }
+  .book-opening h1, .contents-intro h1, .appendix-intro h1 { max-width: none; font-size: var(--fs-xl) line-height: 1.25; margin: 16px 0 18px; word-break: break-word; }
+  .book-opening > p { max-width: none; font-size: var(--fs-m) line-height: 1.65; word-break: break-word; }
 
   .story-preface {
     display: block;
     padding: 24px 0 48px;
     border-top: 1px solid var(--border);
   }
-  .story-preface .chapter-number { display: block; margin-bottom: 12px; font-size: 15px; }
-  .story-preface p { max-width: none; font-size: 20px; line-height: 1.55; word-break: break-word; }
+  .story-preface .chapter-number { display: block; margin-bottom: 12px; font-size: var(--fs-m) }
+  .story-preface p { max-width: none; font-size: var(--fs-l) line-height: 1.55; word-break: break-word; }
 
   .chapter-block { padding: 48px 0 54px; }
   .chapter-heading { display: block; }
-  .chapter-heading .chapter-number { display: block; margin-bottom: 8px; font-size: 15px; }
+  .chapter-heading .chapter-number { display: block; margin-bottom: 8px; font-size: var(--fs-m) }
   .chapter-region { display: block; margin-bottom: 6px; }
-  .chapter-heading h2 { max-width: none; font-size: 27px; line-height: 1.3; margin: 0 0 10px; word-break: break-word; }
-  .chapter-heading p { max-width: none; font-size: 15.5px; line-height: 1.65; word-break: break-word; }
+  .chapter-heading h2 { max-width: none; font-size: var(--fs-l) line-height: 1.3; margin: 0 0 10px; word-break: break-word; }
+  .chapter-heading p { max-width: none; font-size: var(--fs-m) line-height: 1.65; word-break: break-word; }
 
   .story-prose {
     max-width: none;
@@ -1159,28 +1224,30 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   .story-prose .story-quote {
     margin: 1.35em 0;
     padding-left: 1em;
-    font-size: 1em;
+
     line-height: 1.65;
   }
 
   .hard-question { margin-left: 0; margin-top: 32px; padding-top: 16px; }
-  .hard-question strong { font-size: 17.5px; line-height: 1.55; }
+  .chapter-summary { margin-left: 0; }
+  .fact-reading { margin-left: 0; }
+  .hard-question strong { font-size: var(--fs-m) line-height: 1.55; }
   .chapter-tail { margin-left: 0; margin-top: 24px; }
   .reading-end { padding-top: 54px; }
-  .reading-end h2 { font-size: 28px; line-height: 1.3; }
-  .reading-end p { font-size: 16px; line-height: 1.65; }
+  .reading-end h2 { font-size: var(--fs-l) line-height: 1.3; }
+  .reading-end p { font-size: var(--fs-m) line-height: 1.65; }
 
   .contents-row { grid-template-columns: 32px 1fr 16px; gap: 8px; padding: 14px 0; }
-  .contents-row strong { font-size: 16.5px; }
-  .contents-row small { grid-column: 2 / 3; font-size: 13px; }
+  .contents-row strong { font-size: var(--fs-m) }
+  .contents-row small { grid-column: 2 / 3; font-size: var(--fs-s) }
   .contents-appendix { margin-top: 54px; }
   .appendix-index-grid { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
   .appendix-tabs { gap: 16px; overflow-x: auto; }
   .appendix-tabs button { white-space: nowrap; }
   .appendix-section { padding-top: 42px; }
   .appendix-section-heading { display: block; }
-  .appendix-section-heading h2 { font-size: 32px; }
-  .appendix-section-heading > p { margin-top: 10px; font-size: 14.5px; }
+  .appendix-section-heading h2 { font-size: var(--fs-xl) }
+  .appendix-section-heading > p { margin-top: 10px; font-size: var(--fs-m) }
   .mini-map-wrap { margin: 26px -20px 0; padding: 10px 20px; }
   .people-index { grid-template-columns: 1fr; }
   .people-index > div { grid-template-columns: 90px 1fr; }
@@ -1189,22 +1256,32 @@ button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
   .ending-list { grid-template-columns: 1fr; margin-top: 40px; }
   .dlc-summary { grid-template-columns: 1fr; gap: 16px; }
   .theme-list > div { grid-template-columns: 1fr; gap: 6px; }
-  .method-quote { font-size: 22px; }
+  .theme-list-header { display: none; }
+  .theme-col-label {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--brand);
+    font-family: var(--font-mono);
+    font-size: var(--fs-s);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .method-quote { font-size: var(--fs-l) }
   .book-footer { padding: 20px 18px 24px; flex-direction: column; gap: 8px; }
 }
 
 @media (max-width: 430px) {
   .book-nav { gap: 12px; }
-  .book-nav button { font-size: 11px; }
-  .book-opening h1, .contents-intro h1, .appendix-intro h1 { font-size: 32px; }
-  .opening-meta { gap: 8px; font-size: 9px; }
+  .book-nav button { font-size: var(--fs-s) }
+  .book-opening h1, .contents-intro h1, .appendix-intro h1 { font-size: var(--fs-xl) }
+  .opening-meta { gap: 8px; font-size: var(--fs-s) }
   .opening-meta span + span { padding-left: 8px; }
-  .chapter-heading h2 { font-size: 24px; }
-  .story-preface p { font-size: 18px; }
-  .story-prose { font-size: 16px; line-height: 1.65; }
-  .contents-row strong { font-size: 16px; }
+  .chapter-heading h2 { font-size: var(--fs-l) }
+  .story-preface p { font-size: var(--fs-m) }
+  .story-prose { font-size: var(--reader-font-size, 16px); line-height: 1.65; }
+  .contents-row strong { font-size: var(--fs-m) }
   .appendix-index-grid { grid-template-columns: 1fr; }
-  .appendix-section-heading h2 { font-size: 28px; }
+  .appendix-section-heading h2 { font-size: var(--fs-l) }
 }
 
 @media (prefers-reduced-motion: reduce) {
