@@ -1,36 +1,75 @@
-# 游戏剧情档案馆 · Story Atlas
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="游戏剧情档案馆 Story Atlas — 像读一本书一样，读完《巫师 3》与《赛博朋克 2077》的完整剧情">
+</p>
 
-一个手机优先的游戏剧情阅读档案：目前收录《巫师 3：狂猎》（含两个 DLC）与《赛博朋克 2077》（含《往日之影》）。正文像小说一样连续阅读，人物关系、选择后果、结局矩阵和分析方法放在附录。
+<p align="center">
+  <a href="https://xiaosang.cc/game-narrative-archive/">▶ 在线阅读 Read Online</a>
+  ·
+  <a href="https://github.com/holynova/game-narrative-archive">GitHub 仓库</a>
+</p>
 
-## 本地运行
+游戏剧情档案馆是一个手机优先的游戏剧情阅读档案：目前收录《巫师 3：狂猎》（含《石之心》《血与酒》）与《赛博朋克 2077》（含《往日之影》）。正文像小说一样连续读下去，人物关系、选择后果、结局矩阵和分析方法放在附录。这不是任务清单或通关攻略，而是一部可以读完的剧情书——全剧透，入口有剧透提醒。
+
+Story Atlas is a mobile-first reading archive for game narratives, currently covering The Witcher 3: Wild Hunt (Hearts of Stone, Blood and Wine) and Cyberpunk 2077 (Phantom Liberty). The main text reads like a novel, end to end; character relationships, choice consequences, ending matrices, and the analysis method live in the appendix. Not a checklist or walkthrough — a book of stories you can actually finish. Full spoilers, with a warning before entry.
+
+## 截图 / Screenshots
+
+<p align="center">
+  <img src="./assets/readme/screenshot-reading.png" width="300" alt="手机阅读页：《巫师 3》开篇，一场关于如何放手的旅程，序章正文连续排布，阅读、目录、附录三入口">
+</p>
+
+## 内容 / Contents
+
+| 作品 | 章节 | 人物 | 关系 | 关键选择 | 结局 |
+|------|------|------|------|----------|------|
+| 《巫师 3：狂猎》+ 2 个 DLC | 11 | 12 | 12 | 4 | 5 |
+| 《赛博朋克 2077》+《往日之影》 | 10 | 11 | 11 | 4 | 5 |
+| **合计** | **21** | **23** | **23** | **8** | **10** |
+
+- **连续阅读**：从第一页一路读到底，章节标题、规则线与页码提供节奏，不把正文拆成卡片和仪表盘。
+- **附录工具**：人物关系图、选择—结局图、结局矩阵、DLC 主题对照，以及一套可迁移到其他游戏的 7 步剧情分析方法。
+- **事实与判断分开**：确定信息、推断与作者的问题意识分别标记，在道德困境处有意停顿。
+- **支线与 DLC 不降级**：它们是完整叙事的一部分，在阅读结构中自然展开，而非边角附注。
+- **中文阅读**：正文为中文，人物名采用规范的官方中文译名。
+
+## 本地运行 / Run Locally
 
 ```bash
 npm install
-npm run dev
+npm run dev      # 开发服务器
+npm run build    # 类型检查 + 生产构建
+npm run preview  # 预览构建产物
 ```
 
-生产构建：
+纯静态站，无后端、无账号、无数据库。
 
-```bash
-npm run build
+## 技术 / Tech
+
+- React + TypeScript + Vite，内容与界面分离：新增游戏只需按同一结构写数据文件，复用导航与图表组件。
+- 折页档案视觉系统（见 `DESIGN.md`）：纸面底、书页规则、单一墨色加少量铜色批注；手机优先，桌面端同样可读。
+- 产品定位与写作原则见 `PRODUCT.md`。
+
+```
+src/data.ts            巫师 3：章节 / 人物 / 关系 / 选择 / 结局 / DLC 主题 / 分析方法
+src/cyberpunkData.ts   赛博朋克 2077 与《往日之影》的对应内容
+src/App.tsx            双作品统一阅读界面：阅读 / 目录 / 附录
+src/export.ts          导出逻辑
+src/styles.css         折页档案视觉系统 + 手机/桌面响应式
 ```
 
-## 内容结构
+## English
 
-- `src/data.ts`：巫师 3 的剧情、人物、关系、选择、结局、DLC 对照和通用分析方法。
-- `src/cyberpunkData.ts`：赛博朋克 2077 与《往日之影》的对应内容。
-- `src/App.tsx`：统一的双作品阅读、目录和附录界面。
-- `src/styles.css`：折页档案视觉系统，以及手机/桌面响应式布局。
+**Story Atlas** is a mobile-first reading archive for game narratives. It currently covers two games in full, spoilers included:
 
-## 后续扩展
+- **The Witcher 3: Wild Hunt** (+ Hearts of Stone, Blood and Wine): 11 chapters, 12 characters, 12 relationships, 4 key decisions, 5 endings.
+- **Cyberpunk 2077** (+ Phantom Liberty): 10 chapters, 11 characters, 11 relationships, 4 key decisions, 5 endings.
+- **21 chapters, 23 characters, 23 relationships, 8 decisions, 10 endings** in total.
 
-新增游戏时，优先复用 `Chapter`、`Character` 和 `Relationship` 字段结构：
+The main text reads continuously, like a novel — chapter headings and folio counters provide rhythm without breaking the prose into cards or dashboards. The appendix holds the relationship map, choice-to-ending map, ending matrix, DLC comparison, and a reusable 7-step method for analyzing any game's narrative. Confirmed facts are distinguished from interpretation, and the text deliberately pauses at moral dilemmas. Chinese is the primary reading language.
 
-1. 核心问题与世界规则
-2. 主线转折与重要支线
-3. 人物动机与关系
-4. 被延迟的选择与代价
-5. 本体与 DLC 的主题变化
-6. 结局矩阵
+- **Run it**: `npm install && npm run dev`. Fully static — no backend, no accounts, no database.
+- **Tech**: React + TypeScript + Vite. Content is separated from the interface, so a new game only needs a new data file in the same shape. See `PRODUCT.md` and `DESIGN.md` for the editorial principles and visual system.
 
-然后再把数据接入统一的导航和图表组件。
+## 许可 / License
+
+本仓库暂未声明开源许可。
