@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">游戏剧情档案馆 Story Atlas — 像读一本书一样读完整个游戏</title>
+  <desc id="desc">纸面底标题：游戏剧情档案馆，副标题像读一本书一样，读完整个游戏；右侧是两部作品的书脊，《巫师 3》与《赛博朋克 2077》，旁边是第一章战争已经先到了。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#f5f4ed"/>
+
+  <g id="title-block" font-family="'Noto Serif SC', Georgia, 'Songti SC', serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#5a564c" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">游戏剧情阅读档案 · STORY ATLAS</text>
+    <text x="56" y="128" font-size="56" font-weight="600" fill="#1f1d1a">游戏剧情档案馆</text>
+    <text x="56" y="168" font-size="23" fill="#1f1d1a">像读一本书一样，读完整个游戏</text>
+    <text x="56" y="204" font-size="19" fill="#5a564c" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">《巫师 3》×《赛博朋克 2077》，全剧透长篇分析。</text>
+    <g id="chips" font-size="18" fill="#1f1d1a" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+      <g><rect x="56" y="238" width="104" height="36" rx="18" fill="#e9e6da" stroke="#d5d1c2" stroke-width="1.5"/><text x="108" y="262">21 章</text></g>
+      <g><rect x="172" y="238" width="118" height="36" rx="18" fill="#e9e6da" stroke="#d5d1c2" stroke-width="1.5"/><text x="231" y="262">23 位人物</text></g>
+      <g><rect x="302" y="238" width="118" height="36" rx="18" fill="#e9e6da" stroke="#d5d1c2" stroke-width="1.5"/><text x="361" y="262">10 个结局</text></g>
+      <g><rect x="432" y="238" width="150" height="36" rx="18" fill="#e9e6da" stroke="#d5d1c2" stroke-width="1.5"/><text x="507" y="262">2 部作品 + DLC</text></g>
+    </g>
+  </g>
+
+  <g id="books" font-family="'Noto Serif SC', Georgia, 'Songti SC', serif">
+    <g id="book-witcher">
+      <rect x="760" y="56" width="150" height="248" rx="8" fill="#1f4d3a"/>
+      <rect x="772" y="56" width="4" height="248" fill="#16382a"/>
+      <text x="835" y="100" font-size="18" fill="#d8e6dd" text-anchor="middle">THE WITCHER 3</text>
+      <text x="835" y="150" font-size="30" font-weight="600" fill="#f5f4ed" text-anchor="middle">巫师 3</text>
+      <text x="835" y="190" font-size="18" fill="#d8e6dd" text-anchor="middle">狂猎</text>
+      <text x="835" y="268" font-size="18" fill="#d8e6dd" text-anchor="middle">11 章 · 5 结局</text>
+    </g>
+    <g id="book-cyberpunk">
+      <rect x="926" y="56" width="150" height="248" rx="8" fill="#f2c200"/>
+      <rect x="938" y="56" width="4" height="248" fill="#c99f00"/>
+      <text x="1001" y="100" font-size="15" fill="#1f1d1a" text-anchor="middle">CYBERPUNK 2077</text>
+      <text x="1001" y="150" font-size="30" font-weight="600" fill="#1f1d1a" text-anchor="middle">赛博朋克</text>
+      <text x="1001" y="190" font-size="18" fill="#1f1d1a" text-anchor="middle">2077</text>
+      <text x="1001" y="268" font-size="18" fill="#1f1d1a" text-anchor="middle">10 章 · 5 结局</text>
+    </g>
+    <g id="folio" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+      <text x="918" y="336" font-size="18" fill="#5a564c" text-anchor="middle">01 · 战争已经先到了</text>
+    </g>
+  </g>
+</svg>
